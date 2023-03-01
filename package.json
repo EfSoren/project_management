@@ -1,0 +1,20 @@
+{
+  "name": "project_management",
+  "version": "1.0.0",
+  "description": "Project management application for project 3",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mgaskins17/project_management.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mgaskins17/project_management/issues"
+  },
+  "homepage": "https://github.com/mgaskins17/project_management#readme"
+}
