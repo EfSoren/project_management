@@ -1,0 +1,99 @@
+body {
+  margin: 0;
+  min-height: 100vh;
+  width: 100%;
+  background-image: linear-gradient(
+    rgb(95, 190, 219),
+    rgba(23, 82, 100, 0.877),
+    rgb(8, 7, 61),
+    rgba(141, 24, 43, 0.911),
+    rgba(202, 61, 84, 0.795)
+  );
+}
+#root {
+  min-height: 100vh;
+  width: 100%;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.2));
+}
+nav {
+  min-width: 15vw;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  color: white;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.4));
+  /*  background-image: linear-gradient(
+    to bottom right,
+    rgb(61, 98, 219),
+    rgb(8, 7, 61)
+  ); */
+}
+.nav-wrapper {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  position: absolute;
+  top: 10%;
+}
+.nav-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.psuedoImage {
+}
+.nav-profile {
+  display: flex;
+
+  flex-direction: column;
+}
+.nav-profile h1 {
+  margin: 0;
+}
+.nav-profile h2 {
+  margin: 0;
+}
+.nav-link-container {
+  display: flex;
+  margin-top: 1rem;
+  flex-direction: column;
+  align-items: center;
+}
+
+.nav-link-container a {
+  margin: 0.5rem 0;
+  text-decoration: none;
+  color: white;
+}
+
+.project-container {
+  background-image: linear-gradient(
+    to bottom right,
+    rgba(202, 61, 84, 0.904),
+    rgba(141, 24, 43, 0.911),
+    rgb(8, 7, 61),
+    rgba(23, 82, 100, 0.877),
+    rgb(149, 219, 240)
+  );
+  box-shadow: 0 5px 5px 1px black;
+  border-radius: 25px;
+  padding: 3rem 1rem;
+  width: 70%;
+  margin-left: 20%;
+  min-height: 500px;
+
+  position: absolute;
+  top: 10%;
+  display: grid;
+  grid-template-columns: 40% 40%;
+  justify-content: center;
+  gap: 1.5rem;
+}
+.project-card {
+  border: 2px solid white;
+  background: transparent;
+  color: white;
+  text-shadow: 2px 2px black;
+  border-radius: 10px;
+  padding: 1rem;
+}
