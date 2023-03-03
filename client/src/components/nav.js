@@ -1,6 +1,7 @@
 import React from "react";
 import "../assets/styles.css";
-export function Nav({ currentPage, handlePageChange }) {
+
+function Nav({ currentPage, handlePageChange }) {
   return (
     <nav className="nav-container">
       <div className="nav-wrapper">
@@ -12,15 +13,16 @@ export function Nav({ currentPage, handlePageChange }) {
           </div>
         </section>
         <section className="nav-link-container">
-          <a href="#all" onClick={() => handlePageChange("All Projects")}>
+          <a href="#all" onClick={() => handlePageChange("All Projects")} className={currentPage === "All Projects" ? "active" : ""}>
             All Projects
           </a>
-          <a href="#nowhere">Test Link</a>
-          <a href="#nowhere">Test Link</a>
-          <a href="#nowhere">Test Link</a>
-          <a href="#nowhere">Test Link</a>
+          <a href="#single" onClick={() => handlePageChange("Single Project")} className={currentPage === "Single Project" ? "active" : ""}>
+            Single Project
+          </a>
         </section>
       </div>
     </nav>
   );
 }
+
+export default Nav;

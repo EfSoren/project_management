@@ -1,6 +1,15 @@
 import React from "react";
 
-export function Cards() {
+function Cards() {
+  function Card({ title, manager, notes }) {
+    return (
+      <article className="project-card">
+        <h1>{title}</h1>
+        <h2>{manager}</h2>
+        <p>{notes}</p>
+      </article>
+    );
+  }
   const cardArray = [
     {
       title: "Group Project 1",
@@ -33,20 +42,13 @@ export function Cards() {
         "notes, notes, notes, notes, notes, notes, notes, notes, notes, notes, ",
     },
   ];
-  const Card = ({ title, manager, notes }) => {
-    return (
-      <article className="project-card">
-        <h1>{title}</h1>
-        <h2>{manager}</h2>
-        <p>{notes}</p>
-      </article>
-    );
-  };
   return (
     <section className="project-container">
-      {cardArray.map((item) => (
-        <Card {...item} />
+      {cardArray.map((item, index) => (
+        <Card key={index} {...item} />
       ))}
     </section>
   );
 }
+
+export default Cards;
