@@ -1,23 +1,40 @@
-import React from 'react';
-import Handlebars from 'handlebars';
-
-// Define the Handlebars template for the landing page
-const landingPageTemplate = Handlebars.compile(`
-  <div class="container">
-    <h1>{{title}}</h1>
-    <div class="login-container">
-      <!-- Add login form here -->
-    </div>
-  </div>
-`);
+import React, { useState } from 'react';
 
 function LandingPage() {
-  // Compile the Handlebars template and render the final output
-  const html = landingPageTemplate({
-    title: "Welcome to My Project Management App"
-  });
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
-  return <div dangerouslySetInnerHTML={{ __html: html }} />;
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // handle form submission
+  };
+
+  return (
+    <div className="container">
+      <h1>Welcome to My Project Management App</h1>
+      <div className="login-container">
+        <form onSubmit={handleSubmit}>
+          <label>
+            Username:
+            <input
+              type="text"
+              value={username}
+              onChange={(event) => setUsername(event.target.value)}
+            />
+          </label>
+          <label>
+            Password:
+            <input
+              type="password"
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
+            />
+          </label>
+          <button type="submit">Log In</button>
+        </form>
+      </div>
+    </div>
+  );
 }
 
 export default LandingPage;
