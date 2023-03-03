@@ -1,5 +1,6 @@
 const { Schema, model } = require("mongoose");
 const userSchema = require('./user');
+const companySchema = require('./company');
 
 const teamSchema = new Schema({
   id: {
@@ -12,7 +13,10 @@ const teamSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'user'
   }],
-  
+  company: [{
+    type: Schema.Types.ObjectId,
+    ref: 'company'
+  }]
 });
 
 const Team = model('team', teamSchema);

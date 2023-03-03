@@ -16,7 +16,7 @@ const projectSchema = new Schema({
   id: {
     type: Schema.Types.ObjectId,
   },
-  name: {
+  projectName: {
     type: String,
     required: true
   },
