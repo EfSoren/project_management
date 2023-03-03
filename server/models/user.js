@@ -1,4 +1,6 @@
 const { Schema, model } = require('mongoose');
+const companySchema = require('./company');
+const teamSchema = require('./team');
 
 const userSchema = new Schema(
   {
@@ -16,7 +18,8 @@ const userSchema = new Schema(
     username: {
       type: String,
       trim: true,
-      required: true
+      required: true,
+      unique: true
     },
     email: {
       type: String,
@@ -27,19 +30,22 @@ const userSchema = new Schema(
         },
     }
     },
+    company: {
+      type: Schema.Types.ObjectId,
+      ref: 'company'
+    },
     password: {
       type: String,
       trim: true,
       length: [8,],
-      validator: function(password) {
-        return /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/.test(password);
-    },
     },
     position: {
       type: String,
     },
-    team: [teamSchema],
-    company: [companySchema]
+    team: {
+      type: Schema.Types.ObjectId,
+      ref: 'team'
+    }
   }
 );
 
