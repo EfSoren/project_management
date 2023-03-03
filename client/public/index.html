@@ -24,20 +24,27 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>React App</title>
+    <title>My Project Management App</title>
+    <!-- Add Handlebars library -->
+    <script src="https://cdn.jsdelivr.net/npm/handlebars/dist/handlebars.min.js"></script>
+    <!-- Add Handlebars template -->
+    <script id="main-template" type="text/x-handlebars-template">
+      {{! Use the main.handlebars layout file }}
+      {{{body}}}
+      {{! End of main.handlebars layout file }}
+    </script>
+    <!-- Import JavaScript files -->
+    <script src="./card.js"></script>
+    <script src="./current-card.js"></script>
+    <script src="./Dashboard.js"></script>
+    <script src="./LandingPage.js"></script>
+    <script src="./Layout.js"></script>
+    <script src="./Nav.js"></script>
+    <script src="./app.js"></script>
+    <script src="./index.js"></script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
   </body>
 </html>
