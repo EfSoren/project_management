@@ -1,5 +1,5 @@
-import React from 'react';
-import Nav from './Nav';
+import React from "react";
+import Nav from "./nav";
 
 function Layout({ title, children }) {
   return (
@@ -12,9 +12,7 @@ function Layout({ title, children }) {
         <header>
           <Nav />
         </header>
-        <main>
-          {children}
-        </main>
+        <main>{children}</main>
       </body>
     </html>
   );

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import Layout from "./Layout";
-import Nav from "./Nav";
-import Cards from "./Cards";
-import Current from "./Current";
-import LandingPage from "./LandingPage";
-import Dashboard from "./Dashboard";
+import Layout from "./components/layout";
+import Nav from "./components/nav";
+import Cards from "./components/cards";
+import Current from "./components/current_card";
+import LandingPage from "./components/landing_page";
+import Dashboard from "./components/dashboard";
 
 function App() {
   const [currentPage, setCurrentPage] = useState("All Projects");
