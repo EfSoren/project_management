@@ -1,15 +1,18 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 function Cards() {
-  function Card({ title, manager, notes }) {
-    return (
-      <article className="project-card">
-        <h1>{title}</h1>
-        <h2>{manager}</h2>
-        <p>{notes}</p>
-      </article>
-    );
-  }
+  useEffect(() => {
+    fetch("https://jsonplaceholder.typicode.com/users")
+      .then((response) => response.json())
+      .then((json) => {
+        console.log(json);
+
+        console.log(projects);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
   const cardArray = [
     {
       title: "Group Project 1",
@@ -42,9 +45,20 @@ function Cards() {
         "notes, notes, notes, notes, notes, notes, notes, notes, notes, notes, ",
     },
   ];
+
+  const [projects, setProjects] = useState(cardArray);
+  function Card({ title, manager, notes }) {
+    return (
+      <article className="project-card">
+        <h1>{title}</h1>
+        <h2>{manager}</h2>
+        <p>{notes}</p>
+      </article>
+    );
+  }
   return (
     <section className="project-container">
-      {cardArray.map((item, index) => (
+      {projects.map((item, index) => (
         <Card key={index} {...item} />
       ))}
     </section>
