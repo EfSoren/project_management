@@ -14,10 +14,8 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 ReactDOM.render(
-  <ApolloProvider>
     <BrowserRouter>
       <App />
-    </BrowserRouter>
-  </ApolloProvider>,
+    </BrowserRouter>,
   document.getElementById("root")
 );
