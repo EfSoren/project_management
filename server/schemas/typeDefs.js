@@ -27,6 +27,12 @@ const typeDefs = gql`
     getTeam: [Team]
     getProject: [Project]
   }
+
+  type Mutation {
+    createUser(firstName: String! ,lastName: String! ,userName: String! ,email: String! ,password: String!)
+    createProject(_id: String!,name: String! ,teams: String! ,company: String!)
+    createTeam(_id,teamId,users)
+  }
 `;
 
 module.exports = typeDefs;

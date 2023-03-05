@@ -23,17 +23,17 @@ const resolvers = {
             }
         }
     },
-    // Mutations: {
-    //     addUser: async (parent,{ _id,firstName,lastName,userName,email,password,position }) => {
-    //         return User.create({ _id,firstName,lastName,userName,email,password,position });
-    //     },
-    //     addProject: async (parent,{ _id,name,tasks,teams,company }) => {
-    //         return Project.create({ _id,name,tasks,teams,company });
-    //     },
-    //     addTeam: async (parent,{ _id,teamId,users }) => {
-    //         return Team.create({ _id,teamId,users });
-    //     }
-    // }
+    Mutations: {
+        createUser: async (parent,{ _id,firstName,lastName,userName,email,password }) => {
+            return User.create({ _id,firstName,lastName,userName,email,password });
+        },
+        createProject: async (parent,{ _id,name,tasks,teams,company }) => {
+            return Project.create({ _id,name,tasks,teams,company });
+        },
+        createTeam: async (parent,{ teamId }) => {
+            return Team.create({ teamId });
+        }
+    }
 
 
 
