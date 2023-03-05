@@ -3,7 +3,7 @@ const teamSchema = require('./team');
 const companySchema = require('./company');
 const userSchema = require('./user');
 
-const taskSchema = new Schmea({
+const taskSchema = new Schema({
   id: {
     type: Schema.Types.ObjectId,
   },

@@ -23,5 +23,8 @@
   "bugs": {
     "url": "https://github.com/mgaskins17/project_management/issues"
   },
-  "homepage": "https://github.com/mgaskins17/project_management#readme"
+  "homepage": "https://github.com/mgaskins17/project_management#readme",
+  "dependencies": {
+    "dotenv": "^16.0.3"
+  }
 }

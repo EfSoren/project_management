@@ -17,7 +17,7 @@ db.once('open', async () => {
   await Company.deleteMany({});
   await Company.create(companyData);
 
-  await Project.deletemany({});
+  await Project.deleteMany({});
   await Project.create(projectData);
 
   console.log('Project management data seeded!');
