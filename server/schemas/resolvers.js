@@ -23,7 +23,7 @@ const resolvers = {
             }
         }
     },
-    Mutations: {
+    Mutation: {
         createUser: async (parent,{ _id,firstName,lastName,userName,email,password }) => {
             return User.create({ _id,firstName,lastName,userName,email,password });
         },
