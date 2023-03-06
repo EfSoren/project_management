@@ -3,8 +3,8 @@ const { gql } = require('apollo-server-express');
 const typeDefs = gql`
   type User {
     _id: ID
-    firstname: String
-    lastname: String
+    firstName: String
+    lastNme: String
     username: String
     email: String
     password: String
@@ -32,6 +32,10 @@ const typeDefs = gql`
     createUser(firstName: String! ,lastName: String! ,userName: String! ,email: String! ,password: String!)
     createProject(_id: String!,name: String! ,teams: String! ,company: String!)
     createTeam(_id,teamId,users)
+    login(email, password)
+    deleteUser(_id)
+    deleteProject(_id)
+    deleteTeam(_id)
   }
 `;
 

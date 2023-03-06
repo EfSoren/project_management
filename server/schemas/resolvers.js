@@ -1,3 +1,4 @@
+const { AuthenticationError } = require("apollo-server-express");
 const { User,Project,Team } = require("../models");
 
 const resolvers = {
@@ -32,6 +33,27 @@ const resolvers = {
         },
         createTeam: async (parent,{ teamId }) => {
             return Team.create({ teamId });
+        },
+        login: async (parent,{ email,password }) => {
+            const user = await User.findOne({ email });
+
+            if (!user) {
+                throw new AuthenticationError("No user found");
+            }
+
+            const token = signToken(user);
+
+            return { token,user };
+        },
+
+        deleteUser: async (parent,{ _id }) => {
+            return User.findOneAndDelete({ _id });
+        },
+        deleteProject: async (parent,{ _id }) => {
+            return Project.findOneAndDelete({ _id });
+        },
+        deleteTeam: async (parent,{ _id }) => {
+            return Team.findOneAndDelete({ _id });
         }
     }
 
