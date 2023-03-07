@@ -1,0 +1,74 @@
+[
+  {
+    "firstname" : "Brian",
+    "lastname" : "Kernighan",
+    "username": "BKernighan",
+    "email": "bkernighan@techfriends.dev",
+    "password": "password01",
+    "position": "Manager"
+  },
+  {
+    "firstname" : "Max",
+    "lastname" : "Kanat-Alexander",
+    "username": "MKAlexander",
+    "email": "mkanatalexander@techfriends.dev",
+    "password": "password02",
+    "position": "Engineer"
+  },
+  {
+    "firstname" : "Athena",
+    "lastname" : "King",
+    "username": "AKing",
+    "email": "aking@techfriends.dev",
+    "password": "password03",
+    "position": "Engineer"
+  },
+  {
+    "firstname" : "Kent",
+    "lastname" : "Beck",
+    "username": "KBeck",
+    "email": "kbeck@techfriends.dev",
+    "password": "password04",
+    "position": "Engineer"
+  },
+  {
+    "firstname" : "Edward",
+    "lastname" : "Berard",
+    "username": "EBerard",
+    "email": "evberard@techfriends.dev",
+    "password": "password05",
+    "position": "Engineer"
+  },
+  {
+    "firstname" : "Alan",
+    "lastname" : "Kay",
+    "username": "AKay",
+    "email": "akay@techfriends.dev",
+    "password": "password06",
+    "position": "Engineer"
+  },
+  {
+    "firstname" : "Matthew",
+    "lastname" : "Gaskins",
+    "username": "MGaskins",
+    "email": "mgaskins@techfriends.dev",
+    "password": "password07",
+    "position": "Engineer"
+  },
+  {
+    "firstname" : "Jett",
+    "lastname" : "Crowther",
+    "username": "JCrowther",
+    "email": "jcrowther@techfriends.dev",
+    "password": "password08",
+    "position": "Engineer"
+  },
+  {
+    "firstname" : "Ethan",
+    "lastname" : "Sorensen",
+    "username": "ESorensen",
+    "email": "esorensen@techfriends.dev",
+    "password": "password09",
+    "position": "Engineer"
+  }
+]

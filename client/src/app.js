@@ -1,22 +1,21 @@
 import React, { useState } from "react";
-import Layout from "./Layout";
-import Nav from "./Nav";
-import Cards from "./Cards";
-import Current from "./Current";
-import LandingPage from "./LandingPage";
-import Dashboard from "./Dashboard";
+import { Route, Routes } from "react-router-dom";
+import Layout from "./components/layout";
+import Nav from "./components/nav";
+import Cards from "./components/cards";
+import Current from "./components/current_card";
+import LandingPage from "./components/landing_page";
+import Dashboard from "./components/dashboard";
+import Create from "./components/create_project";
 
 function App() {
-  const [currentPage, setCurrentPage] = useState("All Projects");
-  const handlePageChange = (page) => setCurrentPage(page);
-
-  const [loggedIn, setLoggedIn] = React.useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
 
   const handleLogin = () => {
     setLoggedIn(true);
   };
 
-  const renderPage = () => {
+  /* const renderPage = () => {
     if (currentPage === "All Projects") {
       return (
         <Cards currentPage={currentPage} handlePageChange={handlePageChange} />
@@ -25,19 +24,27 @@ function App() {
     if (currentPage === "Single Project") {
       return <Current />;
     }
-  };
+  }; */
 
+  /*  return (
+    <>
+
+      <Nav currentPage={currentPage} handlePageChange={handlePageChange} />
+      {renderPage()}
+    </>
+  );
+  */
+  const userId = "6405442e968973138d97f8e5";
   return (
-    <Layout title="My Project Management App">
-      {loggedIn ? (
-        <>
-          <Nav currentPage={currentPage} handlePageChange={handlePageChange} />
-          {renderPage()}
-        </>
-      ) : (
-        <LandingPage onLogin={handleLogin} />
-      )}
-    </Layout>
+    <Routes>
+      <Route path="/home" element={<Nav />}>
+        <Route index element={<Cards />} />
+        <Route path="single" element={<Current />} />
+        <Route path={`${userId}`} element={<Cards />} />
+        <Route path=":test" element={<Current />} />
+        <Route path="create" element={<Create />} />
+      </Route>
+    </Routes>
   );
 }
 
