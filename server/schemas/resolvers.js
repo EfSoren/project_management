@@ -1,4 +1,4 @@
-const { User,Project,Team,Task} = require("../models");
+const { User,Project,Team,Task } = require("../models");
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/auth');
 
@@ -13,9 +13,6 @@ const resolvers = {
         },
         teams: async () => {
             return await Team.find({});
-        },
-        companies: async () => {
-            return await Company.find({});
         },
         getUser: async (parent,{ userId }) => {
             // const userData = _id ? { _id } : {};
@@ -43,7 +40,7 @@ const resolvers = {
         //     createTeam: async (parent,{ teamId }) => {
         //         return Team.create({ teamId });
         //     },
-        login: async (parent,{ email, password }) => {
+        login: async (parent,{ email,password }) => {
             const user = await User.findOne({ email });
 
             if (!user) {
@@ -53,7 +50,7 @@ const resolvers = {
             const correctPW = await user.isCorrectPassword(password);
 
             if (!correctPW) {
-                throw new AuthenticationError('Incorrect name or password.')
+                throw new AuthenticationError('Incorrect name or password.');
             }
 
             const token = signToken(user);
@@ -71,9 +68,6 @@ const resolvers = {
         }
     }
 
-  }
-
-
 };
 
-module.exports = resolvers
+module.exports = resolvers;
