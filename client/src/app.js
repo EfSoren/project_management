@@ -88,7 +88,7 @@ function App() {
   const userId = "6405442e968973138d97f8e5";
   return (
     <Routes>
-      <Route path="/home" element={<Nav />}>
+      <Route path="/" element={<Nav />}>
         <Route index element={<Cards />} />
         <Route path="single" element={<Current />} />
         <Route path={`${userId}`} element={<Cards />} />

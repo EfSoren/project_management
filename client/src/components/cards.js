@@ -49,7 +49,7 @@ function Cards() {
   console.log(thought);
   function Card({ projectName, __typename, _id }) {
     return (
-      <Link to={`/home/${_id}`}>
+      <Link to={`/${_id}`}>
         <article className="project-card">
           <h1>{projectName}</h1>
           <h2>{__typename}</h2>
