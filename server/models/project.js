@@ -1,18 +1,7 @@
 const { Schema, model } = require("mongoose");
 const teamSchema = require('./team');
 const userSchema = require('./user');
-const taskSchema = require('./task')
-
-const taskSchema = new Schema({
-  name: {
-    type: String,
-    required: true
-  },
-  user: {
-    type: Schema.Types.ObjectId,
-    ref: 'user'
-  }
-});
+const taskSchema = require('./task');
 
 const projectSchema = new Schema({
   projectName: {
