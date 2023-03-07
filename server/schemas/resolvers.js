@@ -1,4 +1,4 @@
-const { User,Project,Team,Company } = require("../models");
+const { User,Project,Team,Task} = require("../models");
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/auth');
 
@@ -13,8 +13,8 @@ const resolvers = {
     teams: async () => {
       return await Team.find({});
     },
-    companies: async () => {
-      return await Company.find({});
+    tasks: async () => {
+      return await Task.find({});
     },
     getUser: async (parent, { userId }) => {
       // const userData = _id ? { _id } : {};

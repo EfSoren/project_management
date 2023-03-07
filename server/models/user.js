@@ -28,10 +28,6 @@ const userSchema = new Schema(
         },
     }
     },
-    company: {
-      type: Schema.Types.ObjectId,
-      ref: 'company'
-    },
     password: {
       type: String,
       trim: true,

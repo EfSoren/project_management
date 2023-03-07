@@ -24,19 +24,18 @@ const typeDefs = gql`
     status: String
   }
 
-  type Company {
+  type Task {
     _id: ID
-    companyName: String
-    teams: ID
-    users: ID
-    projects: ID
+    taskname: String
+    user: ID
+    project: ID
   }
 
   type Query {
     users: [User]
     projects: [Project]
     teams: [Team]
-    companies: [Company]
+    tasks: [Task]
     getUser(userId: ID!): User
     getTeam(teamId: ID!): Team
     getProject(projectId: ID!): Project
