@@ -1,25 +1,31 @@
-const { User,Project,Team } = require("../models");
+const { User,Project,Team,Company } = require("../models");
 
 const resolvers = {
     Query: {
-        getUser: async (parent,{ _id }) => {
-            const userData = _id ? { _id } : {};
-            return User.find(userData);
+        users: async () => {
+            return await User.find({})
         },
-        getProject: async (parent,args,context) => {
+        projects: async () => {
+            return await Project.find({})
+        },
+        teams: async () => {
+            return await Team.find({})
+        },
+        companies: async() => {
+            return await Company.find({})
+        },
+        getUser: async (parent,{ userId }) => {
+            // const userData = _id ? { _id } : {};
+            return User.findById(userId);
+        },
+        getProject: async (parent, { projectId }) => {
             if (context.project) {
-                const projectData = await Project.findOne({ _id: context.project._id })
-                    .select("-__v -password");
-                return projectData;
+                return await Project.findById(projectId)
             }
         },
-
-
-        getTeam: async (parent,args,context) => {
+        getTeam: async (parent,{ teamId }) => {
             if (context.team) {
-                const teamData = await Team.findOne({ _id: context.team._id })
-                    .select("-__v -password");
-                return teamData;
+                return await Team.findById(teamId)
             }
         }
     },
@@ -32,6 +38,27 @@ const resolvers = {
         },
         createTeam: async (parent,{ teamId }) => {
             return Team.create({ teamId });
+        },
+        login: async (parent,{ email,password }) => {
+            const user = await User.findOne({ email });
+
+            if (!user) {
+                throw new AuthenticationError("No user found");
+            }
+
+            const token = signToken(user);
+
+            return { token,user };
+        },
+
+        deleteUser: async (parent,{ _id }) => {
+            return User.findOneAndDelete({ _id });
+        },
+        deleteProject: async (parent,{ _id }) => {
+            return Project.findOneAndDelete({ _id });
+        },
+        deleteTeam: async (parent,{ _id }) => {
+            return Team.findOneAndDelete({ _id });
         }
     }
 
