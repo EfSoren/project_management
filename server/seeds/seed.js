@@ -2,7 +2,7 @@ const db = require('../config/connection');
 const { User, Team, Company, Project } = require('../models/');
 
 const userData = require('./userSeeds.json');
-const teamData = require('./companySeeds.json');
+const teamData = require('./teamSeeds.json');
 const companyData = require('./companySeeds.json');
 const projectData = require('./projectSeeds.json');
 const taskData = require('./taskSeeds.json');

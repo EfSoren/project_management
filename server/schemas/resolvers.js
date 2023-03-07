@@ -1,4 +1,5 @@
 const { User,Project,Team,Company } = require("../models");
+const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -32,9 +33,6 @@ const resolvers = {
     },
 
     Mutation: {
-        createUser: async(parent, {firstname, lastname}) => {
-            return User.create({firstname, lastname})
-        }
         // createUser: async (parent,{ _id,firstName,lastName,userName,email,password }) => {
         //     return User.create({ _id,firstName,lastName,userName,email,password });
         // },
@@ -44,27 +42,32 @@ const resolvers = {
         // createTeam: async (parent,{ teamId }) => {
         //     return Team.create({ teamId });
         // },
-        // login: async (parent,{ email,password }) => {
-        //     const user = await User.findOne({ email });
+        login: async (parent,{ email, password }) => {
+            const user = await User.findOne({ email });
 
-        //     if (!user) {
-        //         throw new AuthenticationError("No user found");
-        //     }
+            if (!user) {
+                throw new AuthenticationError("No user found");
+            }
 
-        //     const token = signToken(user);
+            const correctPW = await user.isCorrectPassword(password);
 
-        //     return { token,user };
-        // },
+            if (!correctPW) {
+                throw new AuthenticationError('Incorrect name or password.')
+            }
 
-        // deleteUser: async (parent,{ _id }) => {
-        //     return User.findOneAndDelete({ _id });
-        // },
-        // deleteProject: async (parent,{ _id }) => {
-        //     return Project.findOneAndDelete({ _id });
-        // },
-        // deleteTeam: async (parent,{ _id }) => {
-        //     return Team.findOneAndDelete({ _id });
-        // }
+            const token = signToken(user);
+            return { token };
+        },
+
+        deleteUser: async (parent,{ _id }) => {
+            return User.findOneAndDelete({ _id });
+        },
+        deleteProject: async (parent,{ _id }) => {
+            return Project.findOneAndDelete({ _id });
+        },
+        deleteTeam: async (parent,{ _id }) => {
+            return Team.findOneAndDelete({ _id });
+        }
     }
 
 };

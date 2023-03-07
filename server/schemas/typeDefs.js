@@ -15,7 +15,7 @@ const typeDefs = gql`
 
   type Team {
     _id: ID
-    teamId: Int
+    teamId: String
   }
 
   type Project {
@@ -43,9 +43,12 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    createUser(firstName: String! ,lastName: String!): User
-   
+    createUser(firstname: String! ,lastname: String!): User
+    login(email: String!, password: String!): User
 
+    deleteUser(_id: ID!): User
+    deleteProject(_id: ID!): Project
+    deleteTeam(_id: ID!): Team
   }
   `;
 
@@ -53,7 +56,5 @@ const typeDefs = gql`
   // createProject(_id: String!,name: String! ,teams: String! ,company: String!): Project
   // createTeam(_id,teamId,users): Team
   // login(email, password): User
-  // deleteUser(_id): User
-  // deleteProject(_id): Project
-  // deleteTeam(_id): Team
+
 module.exports = typeDefs;
