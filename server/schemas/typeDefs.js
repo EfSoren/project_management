@@ -15,7 +15,7 @@ const typeDefs = gql`
 
   type Team {
     _id: ID
-    teamId: Int
+    teamId: String
   }
 
   type Project {
@@ -41,16 +41,20 @@ const typeDefs = gql`
     getTeam(teamId: ID!): Team
     getProject(projectId: ID!): Project
   }
-`;
-/* type Mutation {
-   createUser(firstName: String! ,lastName: String! ,userName: String! ,email: String! ,password: String!)
-   createProject(_id: String!,name: String! ,teams: String! ,company: String!)
-   createTeam(_id,teamId,users)
-   login(email, password)
-   deleteUser(_id)
-   deleteProject(_id)
-   deleteTeam(_id)
 
- }  */
+  type Mutation {
+    createUser(firstname: String! ,lastname: String!): User
+    login(email: String!, password: String!): User
+
+    deleteUser(_id: ID!): User
+    deleteProject(_id: ID!): Project
+    deleteTeam(_id: ID!): Team
+  }
+  `;
+
+
+  // createProject(_id: String!,name: String! ,teams: String! ,company: String!): Project
+  // createTeam(_id,teamId,users): Team
+  // login(email, password): User
 
 module.exports = typeDefs;

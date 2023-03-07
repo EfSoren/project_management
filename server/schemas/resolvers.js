@@ -1,4 +1,6 @@
-const { User, Project, Team, Company } = require("../models");
+const { User,Project,Team,Company } = require("../models");
+const { AuthenticationError } = require('apollo-server-express');
+const { signToken } = require('../utils/auth');
 
 const resolvers = {
   Query: {
@@ -26,27 +28,32 @@ const resolvers = {
         return await Team.findById(teamId);
       }
     },
-  },
-  /* Mutation: {
-        createUser: async (parent,{ _id,firstName,lastName,userName,email,password }) => {
-            return User.create({ _id,firstName,lastName,userName,email,password });
-        },
-        createProject: async (parent,{ _id,name,tasks,teams,company }) => {
-            return Project.create({ _id,name,tasks,teams,company });
-        },
-        createTeam: async (parent,{ teamId }) => {
-            return Team.create({ teamId });
-        },
-        login: async (parent,{ email,password }) => {
+
+    Mutation: {
+        // createUser: async (parent,{ _id,firstName,lastName,userName,email,password }) => {
+        //     return User.create({ _id,firstName,lastName,userName,email,password });
+        // },
+        // createProject: async (parent,{ _id,name,tasks,teams,company }) => {
+        //     return Project.create({ _id,name,tasks,teams,company });
+        // },
+        // createTeam: async (parent,{ teamId }) => {
+        //     return Team.create({ teamId });
+        // },
+        login: async (parent,{ email, password }) => {
             const user = await User.findOne({ email });
 
             if (!user) {
                 throw new AuthenticationError("No user found");
             }
 
-            const token = signToken(user);
+            const correctPW = await user.isCorrectPassword(password);
 
-            return { token,user };
+            if (!correctPW) {
+                throw new AuthenticationError('Incorrect name or password.')
+            }
+
+            const token = signToken(user);
+            return { token };
         },
 
         deleteUser: async (parent,{ _id }) => {
@@ -58,7 +65,11 @@ const resolvers = {
         deleteTeam: async (parent,{ _id }) => {
             return Team.findOneAndDelete({ _id });
         }
-    } */
+    }
+
+
+
+
 };
 
 module.exports = resolvers;
