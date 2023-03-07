@@ -1,6 +1,7 @@
 const { Schema, model } = require("mongoose");
 const userSchema = require('./user');
 const companySchema = require('./company');
+const projectSchema = require('./project');
 
 const teamSchema = new Schema({
   id: {
@@ -16,6 +17,10 @@ const teamSchema = new Schema({
   company: [{
     type: Schema.Types.ObjectId,
     ref: 'company'
+  }],
+  project: [{
+    type: Schema.Types.ObjectId,
+    ref: 'project'
   }]
 });
 

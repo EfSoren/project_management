@@ -36,6 +36,7 @@ const typeDefs = gql`
     deleteUser(_id)
     deleteProject(_id)
     deleteTeam(_id)
+
   }
 `;
 

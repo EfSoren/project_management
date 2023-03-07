@@ -1,18 +1,8 @@
 import React, { useState, useEffect } from "react";
-
+import { useParams } from "react-router-dom";
+import { useQuery } from "@apollo/client";
+import { QUERY_USER } from "../utils/queries";
 function Cards() {
-  useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/users")
-      .then((response) => response.json())
-      .then((json) => {
-        console.log(json);
-
-        console.log(projects);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);
   const cardArray = [
     {
       title: "Group Project 1",
@@ -45,23 +35,35 @@ function Cards() {
         "notes, notes, notes, notes, notes, notes, notes, notes, notes, notes, ",
     },
   ];
-
   const [projects, setProjects] = useState(cardArray);
-  function Card({ title, manager, notes }) {
+
+  const { loading, data } = useQuery(QUERY_USER);
+
+  const thought = data?.getUser || {};
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+  console.log(thought);
+  function Card({ firstname, lastname, _id }) {
     return (
       <article className="project-card">
-        <h1>{title}</h1>
-        <h2>{manager}</h2>
-        <p>{notes}</p>
+        <h1>{firstname}</h1>
+        <h2>{lastname}</h2>
+        <p>{_id}</p>
       </article>
     );
   }
+
   return (
-    <section className="project-container">
-      {projects.map((item, index) => (
-        <Card key={index} {...item} />
-      ))}
-    </section>
+    <>
+      <section className="project-container">
+        {thought.slice(0, 6).map((item, index) => (
+          <Card key={index} {...item} />
+        ))}
+      </section>
+      <button>test</button>
+    </>
   );
 }
 
