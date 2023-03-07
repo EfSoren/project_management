@@ -1,10 +1,17 @@
 import React, { useState } from "react";
+import { useMutation } from "@apollo/client";
+import { CREATE_PROJECT } from "../utils/mutations";
 
 export default function Create() {
   const [projectName, setProjectName] = useState("");
   const [projectManager, setProjectManager] = useState("");
   const [projectDescription, setProjectDescription] = useState("");
   const [projectEndDate, setProjectEndDate] = useState("");
+  const [team, setTeam] = useState("");
+  const [teamId, setTeamId] = useState("");
+
+  const [createProject] = useMutation(CREATE_PROJECT);
+
   const handleInputChange = (e) => {
     const { target } = e;
     const inputType = target.name;
@@ -20,17 +27,32 @@ export default function Create() {
       setProjectEndDate(inputValue);
     }
   };
-  /*  const handleSubmit = (e) => {
-    e.preventDefault()
-    
-    if(projectName === ""){
-        alert("Project title cannot be empty")
-    }
 
- } */
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  
+    createProject({
+      variables: {
+        name: projectName,
+        manager: projectManager,
+        description: projectDescription,
+        endDate: projectEndDate,
+        teamId: teamId,
+      },
+    }).then(() => {
+      setProjectName("");
+      setProjectManager("");
+      setProjectDescription("");
+      setProjectEndDate("");
+      setTeam("");
+      setTeamId("");
+    });
+  };
+  
+
   return (
     <article className="project-container">
-      <form>
+      <form onSubmit={handleSubmit}>
         <input
           value={projectName}
           name="projectName"
@@ -60,7 +82,7 @@ export default function Create() {
           placeholder="Deadline"
         ></input>
 
-        <input type="submit" placeholder={"End Date"}></input>
+        <input type="submit" value="Create Project"></input>
       </form>
     </article>
   );
