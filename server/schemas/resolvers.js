@@ -1,4 +1,4 @@
-const { User,Project,Team,Task} = require("../models");
+const { User,Project,Team,Task } = require("../models");
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/auth');
 
@@ -16,34 +16,37 @@ const resolvers = {
         },
         tasks: async () => {
             return await Task.find({});
+        tasks: async () => {
+            return await Task.find({});
         },
         getUser: async (parent,{ userId }) => {
-            // const userData = _id ? { _id } : {};
             return User.findById(userId);
         },
         getProject: async (parent,{ projectId }) => {
-            if (context.project) {
-                return await Project.findById(projectId);
-            }
+            return await Project.findById(projectId);
         },
         getTeam: async (parent,{ teamId }) => {
-            if (context.team) {
-                return await Team.findById(teamId);
-            }
+            return await Team.findById(teamId);
+        },
+        getTask: async (parent,{ taskId }) => {
+            return await Task.findById(taskId);
         }
     },
 
     Mutation: {
         createUser: async (parent,{ username,firstname,lastname }) => {
-            return User.create({ username,firstname,lastname });
+            return await User.create({ username,firstname,lastname });
         },
         createProject: async (parent,{ projectName,status,teams,endDate }) => {
-            return Project.create({ projectName,status,teams,endDate });
+            return await Project.create({ projectName,status,teams,endDate });
         },
-        //     createTeam: async (parent,{ teamId }) => {
-        //         return Team.create({ teamId });
-        //     },
-        login: async (parent,{ email, password }) => {
+        createTeam: async (parent,{ users,project }) => {
+            return await Team.create({ users,project });
+        },
+        createTask: async (parent,{ taskname,userId,projectId }) => {
+            return await Task.create({ taskname,userId,projectId });
+        },
+        login: async (parent,{ email,password }) => {
             const user = await User.findOne({ email });
 
             if (!user) {
@@ -53,7 +56,7 @@ const resolvers = {
             const correctPW = await user.isCorrectPassword(password);
 
             if (!correctPW) {
-                throw new AuthenticationError('Incorrect name or password.')
+                throw new AuthenticationError('Incorrect name or password.');
             }
 
             const token = signToken(user);
@@ -61,7 +64,7 @@ const resolvers = {
         },
 
         deleteUser: async (parent,{ _id }) => {
-            return User.findOneAndDelete({ _id });
+            return await User.findOneAndDelete({ _id });
         },
         deleteProject: async (parent,{ _id }) => {
             return Project.findOneAndDelete({ _id });
@@ -70,7 +73,12 @@ const resolvers = {
             return Team.findOneAndDelete({ _id });
         }
     }
+};
 
-  };
 
-module.exports = resolvers
+
+
+
+
+
+module.exports = resolvers;

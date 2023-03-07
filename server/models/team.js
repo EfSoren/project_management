@@ -1,10 +1,11 @@
-const { Schema, model } = require("mongoose");
+const { Schema,model } = require("mongoose");
 const userSchema = require('./user');
 const projectSchema = require('./project');
 
 const teamSchema = new Schema({
   teamId: {
-    type: String,
+    // type: String,
+    type: Schema.Types.ObjectId
   },
   users: [{
     type: Schema.Types.ObjectId,
@@ -16,6 +17,6 @@ const teamSchema = new Schema({
   }]
 });
 
-const Team = model('team', teamSchema);
+const Team = model('team',teamSchema);
 
 module.exports = Team;

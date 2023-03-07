@@ -38,19 +38,22 @@ const typeDefs = gql`
     getUser(userId: ID!): User
     getTeam(teamId: ID!): Team
     getProject(projectId: ID!): Project
+    getTask(taskId: ID!): Task
   }
 
   type Mutation {
     createUser(firstname: String! ,lastname: String!): User
     login(email: String!, password: String!): User
     createProject(projectName: String! , status: String!, teams: ID!, endDate: String): Project
+    createTeam(users: ID!, project: ID!): Team
+    createTask(taskname: String!, userId: ID!, projectId: ID!): Task
     deleteUser(_id: ID!): User
     deleteProject(_id: ID!): Project
     deleteTeam(_id: ID!): Team
   }
   `;
-  
-  // createTeam(_id,teamId,users): Team
-  // login(email, password): User
+
+// createTeam(_id,teamId,users): Team
+// login(email, password): User
 
 module.exports = typeDefs;

@@ -1,7 +1,18 @@
-const { Schema, model } = require("mongoose");
+const { Schema,model } = require("mongoose");
 const teamSchema = require('./team');
 const userSchema = require('./user');
 const taskSchema = require('./task');
+
+// const taskSchema = new Schema({
+//   name: {
+//     type: String,
+//     required: true
+//   },
+//   user: {
+//     type: Schema.Types.ObjectId,
+//     ref: 'user'
+//   }
+// });
 
 const projectSchema = new Schema({
   projectName: {
@@ -29,6 +40,6 @@ const projectSchema = new Schema({
   }
 });
 
-const Project = model('project', projectSchema);
+const Project = model('project',projectSchema);
 
 module.exports = Project;
