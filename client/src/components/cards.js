@@ -37,20 +37,9 @@ function Cards() {
     },
   ];
   const [projects, setProjects] = useState(cardArray);
-  const [count, setCount] = useState(0);
-  const [sliceLow, setSliceLow] = useState(count);
-  const [sliceHigh, setSlice] = useState(count + 6);
-  const increaseCount = () => {
-    setCount((prevCount) => prevCount + 7);
-  };
-  const decreaseCount = () => {
-    setCount((prevCount) => prevCount - 7);
-  };
+
   const id = "6405442e968973138d97f8e5";
   const { loading, data } = useQuery(QUERY_PROJECTS);
-  /*   const { loading, data } = useQuery(QUERY_TEST); */
-  /*   {
-  variables: { userId: id },} */
 
   const thought = data?.projects || {};
 
@@ -69,17 +58,13 @@ function Cards() {
       </Link>
     );
   }
-  const sliceRange = (sliceLow, sliceHigh);
+
   return (
     <>
       <section className="project-container">
-        {thought.slice(sliceRange).map((item, index) => (
+        {thought.slice(0, 6).map((item, index) => (
           <Card key={index} {...item} />
         ))}
-        <>
-          <button onClick={decreaseCount}>test</button>
-          <button onClick={increaseCount}>test</button>
-        </>
       </section>
     </>
   );
