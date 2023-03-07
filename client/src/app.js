@@ -6,9 +6,10 @@ import Cards from "./components/cards";
 import Current from "./components/current_card";
 import LandingPage from "./components/landing_page";
 import Dashboard from "./components/dashboard";
+import Create from "./components/create_project";
 
 function App() {
-  const [loggedIn, setLoggedIn] = React.useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
 
   const handleLogin = () => {
     setLoggedIn(true);
@@ -38,6 +39,8 @@ function App() {
       <Route path="/home" element={<Nav />}>
         <Route index element={<Cards />} />
         <Route path="single" element={<Current />} />
+        <Route path="open" element={<Current />} />
+        <Route path="create" element={<Create />} />
       </Route>
     </Routes>
   );
