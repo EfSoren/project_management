@@ -21,6 +21,12 @@ function Nav() {
             <p>
               <Link to="/home/single"> Single Project</Link>
             </p>
+            <p>
+              <Link to="/home/open"> Status Project</Link>
+            </p>
+            <p>
+              <Link to="/home/create"> Create Project</Link>
+            </p>
           </section>
         </div>
       </nav>
