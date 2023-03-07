@@ -1,35 +1,33 @@
-const { User,Project,Team,Company } = require("../models");
+const { User, Project, Team, Company } = require("../models");
 
 const resolvers = {
-    Query: {
-        users: async () => {
-            return await User.find({})
-        },
-        projects: async () => {
-            return await Project.find({})
-        },
-        teams: async () => {
-            return await Team.find({})
-        },
-        companies: async() => {
-            return await Company.find({})
-        },
-        getUser: async (parent,{ userId }) => {
-            // const userData = _id ? { _id } : {};
-            return User.findById(userId);
-        },
-        getProject: async (parent, { projectId }) => {
-            if (context.project) {
-                return await Project.findById(projectId)
-            }
-        },
-        getTeam: async (parent,{ teamId }) => {
-            if (context.team) {
-                return await Team.findById(teamId)
-            }
-        }
+  Query: {
+    users: async () => {
+      return await User.find({});
     },
-    Mutation: {
+    projects: async () => {
+      return await Project.find({});
+    },
+    teams: async () => {
+      return await Team.find({});
+    },
+    companies: async () => {
+      return await Company.find({});
+    },
+    getUser: async (parent, { userId }) => {
+      // const userData = _id ? { _id } : {};
+      return User.findOne({ _id: userId });
+    },
+    getProject: async (parent, { projectId }) => {
+      return await Project.findById(projectId);
+    },
+    getTeam: async (parent, { teamId }) => {
+      if (context.team) {
+        return await Team.findById(teamId);
+      }
+    },
+  },
+  /* Mutation: {
         createUser: async (parent,{ _id,firstName,lastName,userName,email,password }) => {
             return User.create({ _id,firstName,lastName,userName,email,password });
         },
@@ -60,11 +58,7 @@ const resolvers = {
         deleteTeam: async (parent,{ _id }) => {
             return Team.findOneAndDelete({ _id });
         }
-    }
-
-
-
-
+    } */
 };
 
 module.exports = resolvers;
