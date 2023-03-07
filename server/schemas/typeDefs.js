@@ -44,15 +44,13 @@ const typeDefs = gql`
   type Mutation {
     createUser(firstname: String! ,lastname: String!): User
     login(email: String!, password: String!): User
-
+    createProject(projectName: String! , status: String!, teams: ID!, endDate: String): Project
     deleteUser(_id: ID!): User
     deleteProject(_id: ID!): Project
     deleteTeam(_id: ID!): Team
   }
   `;
-
-
-  // createProject(_id: String!,name: String! ,teams: String! ,company: String!): Project
+  
   // createTeam(_id,teamId,users): Team
   // login(email, password): User
 
