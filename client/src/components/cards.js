@@ -37,7 +37,10 @@ function Cards() {
   ];
   const [projects, setProjects] = useState(cardArray);
 
-  const { loading, data } = useQuery(QUERY_USER);
+  const id = "6405442e968973138d97f8e5";
+  const { loading, data } = useQuery(QUERY_USER, {
+    variables: { getUserId: id },
+  });
 
   const thought = data?.getUser || {};
 
@@ -58,9 +61,10 @@ function Cards() {
   return (
     <>
       <section className="project-container">
-        {thought.slice(0, 6).map((item, index) => (
+        <h1>test</h1>
+        {/* {thought.map((item, index) => (
           <Card key={index} {...item} />
-        ))}
+        ))} */}
       </section>
       <button>test</button>
     </>
