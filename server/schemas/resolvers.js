@@ -16,8 +16,6 @@ const resolvers = {
         },
         tasks: async () => {
             return await Task.find({});
-        tasks: async () => {
-            return await Task.find({});
         },
         getUser: async (parent,{ userId }) => {
             return User.findById(userId);
@@ -74,6 +72,7 @@ const resolvers = {
         }
     }
 };
+
 
 
 
