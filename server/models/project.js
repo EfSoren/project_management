@@ -1,7 +1,7 @@
 const { Schema, model } = require("mongoose");
 const teamSchema = require('./team');
-const companySchema = require('./company');
 const userSchema = require('./user');
+const taskSchema = require('./task')
 
 const taskSchema = new Schema({
   name: {
@@ -19,17 +19,16 @@ const projectSchema = new Schema({
     type: String,
     required: true
   },
-  tasks: [taskSchema],
+  tasks: [{
+    type: Schema.Types.ObjectId,
+    ref: 'task'
+  }],
   status: {
     type: String
   },
   teams: [{
     type: Schema.Types.ObjectId,
     ref: 'team'
-  }],
-  company: [{
-    type: Schema.Types.ObjectId,
-    ref: 'company'
   }],
   createdAt: {
     type: Date,

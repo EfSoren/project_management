@@ -1,25 +1,26 @@
 import React, { useEffect, useState } from "react";
-
+import { QUERY_PROJECT } from "../utils/queries";
+import { useParams } from "react-router-dom";
+import { useQuery } from "@apollo/client";
 function Current() {
   const [currentProject, setCurrentProject] = useState({});
-  useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/users/1")
-      .then((response) => response.json())
-      .then((json) => {
-        console.log(json);
-        setCurrentProject(json);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);
+  const { test } = useParams();
+  console.log("test :>> ", test);
+  const id = test;
+  const { loading, data } = useQuery(QUERY_PROJECT, {
+    variables: { projectId: id },
+  });
 
+  const thought = data?.getProject || {};
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+  console.log(thought);
   return (
     <section className="project-container">
-      <h1>{currentProject.name}</h1>
-      <h1>{currentProject.email}</h1>
-      <h1>{currentProject.username}</h1>
-      <h1>{currentProject.id}</h1>
+      <h1>{thought.projectName}</h1>
+      <h1>{thought.__typename}</h1>
+      <h1>{thought._id}</h1>
     </section>
   );
 }

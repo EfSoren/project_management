@@ -5,7 +5,7 @@ const projectSchema = require('./project');
 
 const teamSchema = new Schema({
   teamId: {
-    type: Number,
+    type: String,
   },
   users: [{
     type: Schema.Types.ObjectId,

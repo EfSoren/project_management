@@ -1,7 +1,9 @@
-const { User,Project,Team,Company } = require("../models");
+const { User,Project,Team,Task} = require("../models");
+const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
+
     Query: {
         users: async () => {
             return await User.find({});
@@ -41,29 +43,37 @@ const resolvers = {
         //     createTeam: async (parent,{ teamId }) => {
         //         return Team.create({ teamId });
         //     },
-        //     login: async (parent,{ email,password }) => {
-        //         const user = await User.findOne({ email });
+        login: async (parent,{ email, password }) => {
+            const user = await User.findOne({ email });
 
-        //         if (!user) {
-        //             throw new AuthenticationError("No user found");
-        //         }
+            if (!user) {
+                throw new AuthenticationError("No user found");
+            }
 
-        //         const token = signToken(user);
+            const correctPW = await user.isCorrectPassword(password);
 
-        //         return { token,user };
-        //     },
+            if (!correctPW) {
+                throw new AuthenticationError('Incorrect name or password.')
+            }
+
+            const token = signToken(user);
+            return { token };
+        },
 
         deleteUser: async (parent,{ _id }) => {
             return User.findOneAndDelete({ _id });
         },
-        //     deleteProject: async (parent,{ _id }) => {
-        //         return Project.findOneAndDelete({ _id });
-        //     },
-        //     deleteTeam: async (parent,{ _id }) => {
-        //         return Team.findOneAndDelete({ _id });
-        //     }
+        deleteProject: async (parent,{ _id }) => {
+            return Project.findOneAndDelete({ _id });
+        },
+        deleteTeam: async (parent,{ _id }) => {
+            return Team.findOneAndDelete({ _id });
+        }
     }
+
+  }
+
 
 };
 
-module.exports = resolvers;
+module.exports = resolvers
