@@ -5,7 +5,7 @@ const userData = require('./userSeeds.json');
 const teamData = require('./companySeeds.json');
 const companyData = require('./companySeeds.json');
 const projectData = require('./projectSeeds.json');
-
+const taskData = require('./taskSeeds.json');
 
 db.once('open', async () => {
   await User.deleteMany({});
