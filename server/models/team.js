@@ -4,9 +4,6 @@ const companySchema = require('./company');
 const projectSchema = require('./project');
 
 const teamSchema = new Schema({
-  id: {
-    type: Schema.Types.ObjectId,
-  },
   teamId: {
     type: Number,
   },

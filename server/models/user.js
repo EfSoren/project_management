@@ -4,9 +4,6 @@ const teamSchema = require('./team');
 
 const userSchema = new Schema(
   {
-    id: {
-        type: Schema.Types.ObjectId,
-    },
     firstname: {
       type: String,
       trim: true

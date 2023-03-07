@@ -7,8 +7,10 @@ const typeDefs = gql`
     lastname: String
     username: String
     email: String
+    company: ID
     password: String
     position: String
+    team: ID
   }
 
   type Team {
@@ -22,10 +24,22 @@ const typeDefs = gql`
     status: String
   }
 
+  type Company {
+    _id: ID
+    companyName: String
+    teams: ID
+    users: ID
+    projects: ID
+  }
+
   type Query {
-    getUser: [User]
-    getTeam: [Team]
-    getProject: [Project]
+    users: [User]
+    projects: [Project]
+    teams: [Team]
+    companies: [Company]
+    getUser(userId: ID!): User
+    getTeam(teamId: ID!): Team
+    getProject(projectId: ID!): Project
   }
 
   type Mutation {

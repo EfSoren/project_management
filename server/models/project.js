@@ -4,9 +4,6 @@ const companySchema = require('./company');
 const userSchema = require('./user');
 
 const taskSchema = new Schema({
-  id: {
-    type: Schema.Types.ObjectId,
-  },
   name: {
     type: String,
     required: true
@@ -18,9 +15,6 @@ const taskSchema = new Schema({
 });
 
 const projectSchema = new Schema({
-  id: {
-    type: Schema.Types.ObjectId,
-  },
   projectName: {
     type: String,
     required: true
