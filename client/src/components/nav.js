@@ -3,6 +3,8 @@ import { Link, Outlet } from "react-router-dom";
 import "../assets/styles.css";
 
 function Nav() {
+  // Query
+
   return (
     <>
       <nav className="nav-container">

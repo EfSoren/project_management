@@ -5,12 +5,19 @@ import { BrowserRouter } from "react-router-dom";
 import {
   ApolloClient,
   InMemoryCache,
-  gql,
   ApolloProvider,
 } from "@apollo/client";
 
+
+// Heroku final deployment
+// export const client = new ApolloClient({
+//   uri: "https://project3-projectmanagement.herokuapp.com/graphql",
+//   cache: new InMemoryCache(),
+// });
+
+// Local Host Testing
 export const client = new ApolloClient({
-  uri: "https://project3-projectmanagement.herokuapp.com/graphql",
+  uri: "http://localhost:3001/graphql",
   cache: new InMemoryCache(),
 });
 

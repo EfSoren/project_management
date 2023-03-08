@@ -46,21 +46,16 @@ const resolvers = {
         },
         login: async (parent,{ email,password }) => {
             const user = await User.findOne({ email });
-
             if (!user) {
                 throw new AuthenticationError("No user found");
             }
-
             const correctPW = await user.isCorrectPassword(password);
-
             if (!correctPW) {
                 throw new AuthenticationError('Incorrect name or password.');
             }
-
             const token = signToken(user);
             return { token };
         },
-
         deleteUser: async (parent,{ _id }) => {
             return await User.findOneAndDelete({ _id });
         },

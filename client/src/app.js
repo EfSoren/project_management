@@ -67,33 +67,15 @@ function App() {
     setLoggedIn(true);
   };
 
-  /* const renderPage = () => {
-    if (currentPage === "All Projects") {
-      return (
-        <Cards currentPage={currentPage} handlePageChange={handlePageChange} />
-      );
-    }
-    if (currentPage === "Single Project") {
-      return <Current />;
-    }
-  }; */
-
-  /*  return (
-    <>
-      <Nav currentPage={currentPage} handlePageChange={handlePageChange} />
-      {renderPage()}
-    </>
-  );
-  */
   const userId = "6405442e968973138d97f8e5";
   return (
     <Routes>
       <Route path="/" element={<Nav />}>
         <Route index element={<Cards />} />
-        <Route path="single" element={<Current />} />
-        <Route path={`${userId}`} element={<Cards />} />
-        <Route path=":test" element={<Current />} />
-        <Route path="create" element={<Create />} />
+        <Route path="/single" element={<Current />} />
+        <Route path={`/${userId}`} element={<Cards />} />
+        <Route path="/:test" element={<Current />} />
+        <Route path="/create" element={<Create />} />
       </Route>
     </Routes>
   );
