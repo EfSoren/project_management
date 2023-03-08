@@ -1,56 +1,100 @@
 import React, { useState } from "react";
 import { checkPassword, validateEmail } from "../utils/helpers";
-export function CreateUser() {
-  const [createEmail, setCreateEmail] = useState("");
-  const [createPassword, setCreatePassword] = useState("");
-  const [createUsername, setCreateUsername] = useState("");
-  const [createFirstname, setCreateFirstname] = useState("");
-  const [createLastname, setCreateLastname] = useState("");
+import { CREATE_USER } from "../utils/mutations";
+import { useMutation } from "@apollo/client";
+export default function CreateUser() {
+  const [userInfo, setUserInfo] = useState({
+    username: "",
+    email: "",
+    password: "",
+    firstname: "",
+    lastname: "",
+  });
+
   const [errorMessage, setErrorMessage] = useState("");
-  const handleInputChange = (event) => {
-    const { target } = event;
-    const inputType = target.name;
-    const inputValue = target.value;
+  const [createUser] = useMutation(CREATE_USER);
 
-    if (inputType === "email") {
-      setCreateEmail(inputValue);
-    }
-    if (inputType === "password") {
-      setCreatePassword(inputValue);
-    }
-    if (inputType === "username") {
-      setCreateUsername(inputValue);
-    }
-    if (inputType === "firstname") {
-      setCreateFirstname(inputValue);
-    }
-    if (inputType === "lastname") {
-      setCreateLastname(inputValue);
-    }
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setUserInfo({
+      ...userInfo,
+      [name]: value,
+    });
   };
-}
 
-const handleFormSubmit = (e) => {
-  // Preventing the default behavior of the form submit (which is to refresh the page)
-  e.preventDefault();
+  const handleFormSubmit = (e) => {
+    // Preventing the default behavior of the form submit (which is to refresh the page)
+    e.preventDefault();
 
-  // First we check to see if the email is not valid or if the userName is empty. If so we set an error message to be displayed on the page.
-  if (!validateEmail(createEmail) || !userName) {
-    setErrorMessage("Email or username is invalid");
-    // We want to exit out of this code block if something is wrong so that the user can correct it
-    return;
-    // Then we check to see if the password is not valid. If so, we set an error message regarding the password.
-  }
-  if (!checkPassword(password)) {
-    setErrorMessage(
-      `Choose a more secure password for the account: ${userName}`
+    // First we check to see if the email is not valid or if the userName is empty. If so we set an error message to be displayed on the page.
+    if (
+      !validateEmail(userInfo.email) ||
+      !userInfo.username ||
+      !userInfo.firstname ||
+      !userInfo.lastname ||
+      !userInfo.password
+    ) {
+      setErrorMessage("Missing Input Fields");
+      // We want to exit out of this code block if something is wrong so that the user can correct it
+      return;
+      // Then we check to see if the password is not valid. If so, we set an error message regarding the password.
+    }
+    /* if (!checkPassword(userInfo.password)) {
+      setErrorMessage(
+        `Password must be between 7-14 letters and only include letters`
+      );
+      return;
+    } */
+    createUser({ variables: userInfo }).then(() =>
+      setUserInfo({
+        username: "",
+        email: "",
+        password: "",
+        firstname: "",
+        lastname: "",
+      })
     );
-    return;
-  }
-  alert(`Hello ${userName}`);
-
-  // If everything goes according to plan, we want to clear out the input after a successful registration.
-  setUserName("");
-  setPassword("");
-  setEmail("");
-};
+  };
+  return (
+    <article className="project-container">
+      <form onSubmit={handleFormSubmit}>
+        <input
+          name="firstname"
+          type="text"
+          value={userInfo.firstname}
+          onChange={handleInputChange}
+          placeholder="First Name"
+        />
+        <input
+          name="lastname"
+          type="text"
+          value={userInfo.lastname}
+          onChange={handleInputChange}
+          placeholder="Last Name"
+        />
+        <input
+          name="username"
+          type="text"
+          value={userInfo.username}
+          onChange={handleInputChange}
+          placeholder="Username"
+        />
+        <input
+          name="email"
+          type="text"
+          value={userInfo.email}
+          onChange={handleInputChange}
+          placeholder="Email"
+        />
+        <input
+          name="password"
+          type="password"
+          value={userInfo.password}
+          onChange={handleInputChange}
+          placeholder="Password"
+        />
+        <input type="submit" value="Create User" />
+      </form>
+    </article>
+  );
+}

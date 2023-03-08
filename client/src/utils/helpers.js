@@ -5,7 +5,7 @@ export function validateEmail(email) {
 }
 
 export function checkPassword(input) {
-  const passw = /^[A-Za-z]\w{7,14}$/;
+  const passw = /^[A-Za-z0-9]\w{7,14}$/;
   if (input.match(passw)) {
     return true;
   }

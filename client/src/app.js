@@ -57,6 +57,7 @@ import Cards from "./components/cards";
 import Current from "./components/current_card";
 import Login from "./components/login";
 import Create from "./components/create_project";
+import CreateUser from "./components/create_user";
 import {
   ApolloClient,
   InMemoryCache,
@@ -104,6 +105,7 @@ function App() {
           <Route path="single" element={<Current />} />
           <Route path=":test" element={<Current />} />
           <Route path="create" element={<Create />} />
+          <Route path="createuser" element={<CreateUser />} />
         </Route>
       </Routes>
     </ApolloProvider>
