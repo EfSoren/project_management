@@ -1,8 +1,11 @@
 import React from "react";
 import { Link, Outlet } from "react-router-dom";
 import "../assets/styles.css";
+import Logout from "./Logout";
 
 function Nav() {
+  // Query
+
   return (
     <>
       <nav className="nav-container">
@@ -15,18 +18,13 @@ function Nav() {
             </div>
           </section>
           <section className="nav-link-container">
-            <p>
-              <Link to="/home"> All Projects</Link>
-            </p>
-            <p>
-              <Link to="/home/single"> Single Project</Link>
-            </p>
-            <p>
-              <Link to="/home/open"> Status Project</Link>
-            </p>
-            <p>
-              <Link to="/home/create"> Create Project</Link>
-            </p>
+            <Link to="/home">All Projects</Link>
+            <Link to="/home/single">Single Project</Link>
+            <Link to="/home/open">Status Project</Link>
+            <Link to="/home/create">Create Project</Link>
+          </section>
+          <section className="nav-logout">
+            <Logout />
           </section>
         </div>
       </nav>

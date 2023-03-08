@@ -1,66 +1,71 @@
 import React, { useState } from "react";
+import { useMutation } from "@apollo/client";
+import { CREATE_PROJECT } from "../utils/mutations";
 
 export default function Create() {
-  const [projectName, setProjectName] = useState("");
-  const [projectManager, setProjectManager] = useState("");
-  const [projectDescription, setProjectDescription] = useState("");
-  const [projectEndDate, setProjectEndDate] = useState("");
+  const [formState, setFormState] = useState({
+    projectName: "",
+    projectManager: "",
+    projectDescription: "",
+    projectEndDate: "",
+    teamId: "",
+  });
+
+  const [createProject] = useMutation(CREATE_PROJECT);
+
   const handleInputChange = (e) => {
-    const { target } = e;
-    const inputType = target.name;
-    const inputValue = target.value;
-
-    if (inputType === "projectName") {
-      setProjectName(inputValue);
-    } else if (inputType === "projectManager") {
-      setProjectManager(inputValue);
-    } else if (inputType === "projectDescription") {
-      setProjectDescription(inputValue);
-    } else if (inputType === "projectEndDate") {
-      setProjectEndDate(inputValue);
-    }
+    const { name, value } = e.target;
+    setFormState({
+      ...formState,
+      [name]: value,
+    });
   };
-  /*  const handleSubmit = (e) => {
-    e.preventDefault()
-    
-    if(projectName === ""){
-        alert("Project title cannot be empty")
-    }
 
- } */
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    createProject({ variables: formState }).then(() =>
+      setFormState({
+        projectName: "",
+        projectManager: "",
+        projectDescription: "",
+        projectEndDate: "",
+        teamId: "",
+      })
+    );
+  };
+
   return (
     <article className="project-container">
-      <form>
+      <form onSubmit={handleSubmit}>
         <input
-          value={projectName}
           name="projectName"
           type="text"
+          value={formState.projectName}
           onChange={handleInputChange}
           placeholder="Project Name"
-        ></input>
+        />
         <input
-          value={projectManager}
           name="projectManager"
           type="text"
+          value={formState.projectManager}
           onChange={handleInputChange}
           placeholder="Manager"
-        ></input>
+        />
         <input
-          value={projectDescription}
           name="projectDescription"
           type="text"
+          value={formState.projectDescription}
           onChange={handleInputChange}
           placeholder="Description"
-        ></input>
+        />
         <input
-          value={projectEndDate}
           name="projectEndDate"
           type="date"
+          value={formState.projectEndDate}
           onChange={handleInputChange}
           placeholder="Deadline"
-        ></input>
-
-        <input type="submit" placeholder={"End Date"}></input>
+        />
+        <input type="submit" value="Create Project" />
       </form>
     </article>
   );

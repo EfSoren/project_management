@@ -1,12 +1,14 @@
 const { Schema,model } = require("mongoose");
 const userSchema = require('./user');
-const companySchema = require('./company');
 const projectSchema = require('./project');
 
 const teamSchema = new Schema({
   teamId: {
     // type: String,
     type: Schema.Types.ObjectId
+  },
+  teamname: {
+    type: String
   },
   users: [{
     type: Schema.Types.ObjectId,

@@ -7,7 +7,6 @@ const typeDefs = gql`
     lastname: String
     username: String
     email: String
-    company: ID
     password: String
     position: String
     team: ID
@@ -22,6 +21,11 @@ const typeDefs = gql`
     _id: ID
     projectName: String
     status: String
+  }
+
+  type Auth {
+    token: ID!
+    user: User
   }
 
   type Task {
@@ -43,8 +47,8 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    createUser(username: String!, password: String!, email: String, firstname: String!, lastname: String!, position: String!): User
-    login(email: String!, password: String!): User
+    createUser(firstname: String! ,lastname: String!): User
+    login(email: String!, password: String!): Auth
     createProject(projectName: String! , status: String!, teams: ID!, endDate: String): Project
     createTeam(user: String!, project: ID!): Team
     createTask(taskname: String!, userId: ID!, projectId: ID!): Task
