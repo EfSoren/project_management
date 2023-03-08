@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { checkPassword, validateEmail } from "../utils/helpers";
-import { CREATE_USER } from "../utils/mutations";
+import { CREATE_USER, LOGIN_USER } from "../utils/mutations";
 import { useMutation } from "@apollo/client";
+import Auth from "../utils/auth";
 export default function CreateUser() {
   const [userInfo, setUserInfo] = useState({
     username: "",
@@ -14,6 +15,7 @@ export default function CreateUser() {
 
   const [errorMessage, setErrorMessage] = useState("");
   const [createUser] = useMutation(CREATE_USER);
+  const [loginUser] = useMutation(LOGIN_USER);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -23,48 +25,44 @@ export default function CreateUser() {
     });
   };
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     // Preventing the default behavior of the form submit (which is to refresh the page)
     e.preventDefault();
 
     // First we check to see if the email is not valid or if the userName is empty. If so we set an error message to be displayed on the page.
-    if (
-      !validateEmail(userInfo.email) ||
-      !userInfo.username ||
-      !userInfo.firstname ||
-      !userInfo.lastname ||
-      !userInfo.password
-    ) {
-      setErrorMessage("Missing Input Fields");
-      // We want to exit out of this code block if something is wrong so that the user can correct it
-      return;
-      // Then we check to see if the password is not valid. If so, we set an error message regarding the password.
+    try {
+      if (
+        !validateEmail(userInfo.email) ||
+        !userInfo.username ||
+        !userInfo.firstname ||
+        !userInfo.lastname ||
+        !userInfo.password
+      ) {
+        setErrorMessage("Missing Input Fields");
+        console.log(setErrorMessage);
+        // We want to exit out of this code block if something is wrong so that the user can correct it
+        return;
+        // Then we check to see if the password is not valid. If so, we set an error message regarding the password.
+      }
+      const { data } = await createUser({
+        variables: {
+          username: userInfo.username,
+          password: userInfo.password,
+          email: userInfo.email,
+          firstname: userInfo.firstname,
+          lastname: userInfo.lastname,
+          position: userInfo.position,
+        },
+      });
+
+      const signIn = await loginUser({
+        variables: { email: userInfo.email, password: userInfo.password },
+      });
+
+      Auth.login(signIn.data.login.token);
+    } catch (error) {
+      console.log(error);
     }
-    /* if (!checkPassword(userInfo.password)) {
-      setErrorMessage(
-        `Password must be between 7-14 letters and only include letters`
-      );
-      return;
-    } */
-    createUser({
-      variables: {
-        $username: userInfo.username,
-        $firstname: userInfo.firstname,
-        $lastname: userInfo.lastname,
-        $email: userInfo.email,
-        $password: userInfo.password,
-        $position: userInfo.position,
-      },
-    }).then(() =>
-      setUserInfo({
-        username: "",
-        email: "",
-        password: "",
-        firstname: "",
-        lastname: "",
-        position: "",
-      })
-    );
   };
   return (
     <article className="project-container">

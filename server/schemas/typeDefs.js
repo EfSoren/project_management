@@ -47,16 +47,29 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    createUser(username: String!, password: String!, email: String!, firstname: String!, lastname: String!, position: String!): User
+    createUser(
+      username: String!
+      password: String!
+      email: String!
+      firstname: String!
+      lastname: String!
+      position: String!
+      team: ID!
+    ): User
     login(email: String!, password: String!): Auth
-    createProject(projectName: String! , status: String!, teams: ID!, endDate: String): Project
+    createProject(
+      projectName: String!
+      status: String!
+      teams: ID!
+      endDate: String
+    ): Project
     createTeam(user: String!, project: ID!): Team
     createTask(taskname: String!, userId: ID!, projectId: ID!): Task
     deleteUser(_id: ID!): User
     deleteProject(_id: ID!): Project
     deleteTeam(_id: ID!): Team
   }
-  `;
+`;
 
 // createTeam(_id,teamId,users): Team
 // login(email, password): User
