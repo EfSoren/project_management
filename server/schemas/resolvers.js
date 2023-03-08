@@ -1,6 +1,7 @@
 const { User,Project,Team,Task } = require("../models");
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/auth');
+const bcrypt = require('bcrypt');
 
 const resolvers = {
 
@@ -33,7 +34,7 @@ const resolvers = {
 
     Mutation: {
         createUser: async (parent,{ username,password,email,firstname,lastname,position }) => {
-            return await User.create({ username,password,email,firstname,lastname,position });
+            return await User.create({ username,password: password,email,firstname,lastname,position });
         },
         createProject: async (parent,{ projectName,status,teams,endDate }) => {
             return await Project.create({ projectName,status,teams,endDate });
@@ -54,7 +55,7 @@ const resolvers = {
                 throw new AuthenticationError('Incorrect name or password.');
             }
             const token = signToken(user);
-            return { token, user };
+            return { token,user };
         },
         deleteUser: async (parent,{ _id }) => {
             return await User.findOneAndDelete({ _id });

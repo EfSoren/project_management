@@ -1,5 +1,5 @@
-const { Schema, model } = require('mongoose');
-bcrypt = require('bcrypt');
+const { Schema,model } = require('mongoose');
+const bcrypt = require('bcrypt');
 const companySchema = require('./company');
 const teamSchema = require('./team');
 
@@ -23,10 +23,10 @@ const userSchema = new Schema(
       type: String,
       trim: true,
       validate: {
-        validator: function(email) {
-            return /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/.test(email);
+        validator: function (email) {
+          return /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/.test(email);
         },
-    }
+      }
     },
     password: {
       type: String,
@@ -43,10 +43,19 @@ const userSchema = new Schema(
   }
 );
 
-userSchema.methods.isCorrectPassword = async function (password) {
-  return bcrypt.compare(password, this.password);
-}
+userSchema.pre('save',async function (next) {
+  if (this.isNew || this.isModified('password')) {
+    const saltRounds = 10;
+    this.password = await bcrypt.hash(this.password,saltRounds);
+  }
 
-const User = model('user', userSchema);
+  next();
+});
+
+userSchema.methods.isCorrectPassword = async function (password) {
+  return bcrypt.compare(password,this.password);
+};
+
+const User = model('user',userSchema);
 
 module.exports = User;
