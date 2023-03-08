@@ -9,6 +9,7 @@ export default function CreateUser() {
     password: "",
     firstname: "",
     lastname: "",
+    position: "",
   });
 
   const [errorMessage, setErrorMessage] = useState("");
@@ -45,13 +46,23 @@ export default function CreateUser() {
       );
       return;
     } */
-    createUser({ variables: userInfo }).then(() =>
+    createUser({
+      variables: {
+        $username: userInfo.username,
+        $firstname: userInfo.firstname,
+        $lastname: userInfo.lastname,
+        $email: userInfo.email,
+        $password: userInfo.password,
+        $position: userInfo.position,
+      },
+    }).then(() =>
       setUserInfo({
         username: "",
         email: "",
         password: "",
         firstname: "",
         lastname: "",
+        position: "",
       })
     );
   };
@@ -92,6 +103,13 @@ export default function CreateUser() {
           value={userInfo.password}
           onChange={handleInputChange}
           placeholder="Password"
+        />
+        <input
+          name="position"
+          type="text"
+          value={userInfo.position}
+          onChange={handleInputChange}
+          placeholder="Position"
         />
         <input type="submit" value="Create User" />
       </form>
