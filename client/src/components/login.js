@@ -65,7 +65,7 @@ function Login() {
         <button type="submit">Submit</button>
       </form>
       <button onClick={handleTestSubmit}>Login as guest user</button>
-      <Link to="/home/createuser">
+      <Link to="/sign-up">
         <button>Sign Up</button>
       </Link>
     </>
