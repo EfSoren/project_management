@@ -23,8 +23,8 @@ const resolvers = {
         getProject: async (parent,{ projectId }) => {
             return await Project.findById(projectId);
         },
-        getTeam: async (parent,{ teamId }) => {
-            return await Team.findById(teamId);
+        getTeam: async (parent,{ teamId,users }) => {
+            return await Team.findById(teamId,users);
         },
         getTask: async (parent,{ taskId }) => {
             return await Task.findById(taskId);
@@ -32,8 +32,8 @@ const resolvers = {
     },
 
     Mutation: {
-        createUser: async (parent,{ username,firstname,lastname }) => {
-            return await User.create({ username,firstname,lastname });
+        createUser: async (parent,{ username,password,email,firstname,lastname,position }) => {
+            return await User.create({ username,password,email,firstname,lastname,position });
         },
         createProject: async (parent,{ projectName,status,teams,endDate }) => {
             return await Project.create({ projectName,status,teams,endDate });
@@ -49,7 +49,12 @@ const resolvers = {
             if (!user) {
                 throw new AuthenticationError("No user found");
             }
+
+            console.log(user.password);
+
+            console.log(password)
             const correctPW = await user.isCorrectPassword(password);
+            console.log(correctPW)
             if (!correctPW) {
                 throw new AuthenticationError('Incorrect name or password.');
             }
@@ -64,7 +69,8 @@ const resolvers = {
         },
         deleteTeam: async (parent,{ _id }) => {
             return Team.findOneAndDelete({ _id });
-        }
+        },
+        // TODO: deleteTask
     }
 };
 
