@@ -22,6 +22,7 @@ function Nav() {
             <Link to="/home/single">Single Project</Link>
             <Link to="/home/open">Status Project</Link>
             <Link to="/home/create">Create Project</Link>
+            <Link to="/home/createuser">Create User</Link>
           </section>
           <section className="nav-logout">
             <Logout />
