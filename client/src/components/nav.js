@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, Outlet } from "react-router-dom";
 import "../assets/styles.css";
-import Logout from "./Logout";
+import Logout from "./logout";
 
 function Nav() {
   // Query

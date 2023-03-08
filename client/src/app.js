@@ -52,12 +52,10 @@ export default App;
  */
 import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
-import Layout from "./components/layout";
 import Nav from "./components/nav";
 import Cards from "./components/cards";
 import Current from "./components/current_card";
-import LandingPage from "./components/landing_page";
-import Dashboard from "./components/dashboard";
+import Login from "./components/login";
 import Create from "./components/create_project";
 import {
   ApolloClient,
@@ -100,7 +98,8 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Routes>
-        <Route path="/" element={<Nav />}>
+        <Route path="/" element={<Login />} />
+        <Route path="/home" element={<Nav />}>
           <Route index element={<Cards />} />
           <Route path="single" element={<Current />} />
           <Route path=":test" element={<Current />} />
