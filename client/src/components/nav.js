@@ -4,6 +4,8 @@ import "../assets/styles.css";
 import Logout from "./Logout";
 
 function Nav() {
+  // Query
+
   return (
     <>
       <nav className="nav-container">

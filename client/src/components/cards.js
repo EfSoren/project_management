@@ -14,7 +14,7 @@ function Cards() {
 
   function Card({ _id, projectName, __typename }) {
     return (
-      <Link to={`/home/${_id}`}>
+      <Link to={`/${_id}`}>
         <article className="project-card">
           <h1>{projectName}</h1>
           <h2>{__typename}</h2>

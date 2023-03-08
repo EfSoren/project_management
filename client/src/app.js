@@ -77,6 +77,7 @@ function App() {
     uri: "/graphql",
   });
 
+
   // Construct request middleware that will attach the JWT token to every request as an `authorization` header
   const authLink = setContext((_, { headers }) => {
     // get the authentication token from local storage if it exists
@@ -96,7 +97,7 @@ function App() {
     cache: new InMemoryCache(),
   });
 
-  const userId = "6405442e968973138d97f8e5";
+
   return (
     <ApolloProvider client={client}>
       <Routes>
@@ -109,6 +110,7 @@ function App() {
         </Route>
       </Routes>
     </ApolloProvider>
+
   );
 }
 
