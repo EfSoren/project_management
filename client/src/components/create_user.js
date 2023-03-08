@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { checkPassword, validateEmail } from "../utils/helpers";
-import { CREATE_USER } from "../utils/mutations";
+import { CREATE_USER, LOGIN_USER } from "../utils/mutations";
 import { useMutation } from "@apollo/client";
+import Auth from "../utils/auth";
 export default function CreateUser() {
   const [userInfo, setUserInfo] = useState({
     username: "",
@@ -14,6 +15,7 @@ export default function CreateUser() {
 
   const [errorMessage, setErrorMessage] = useState("");
   const [createUser] = useMutation(CREATE_USER);
+  const [loginUser] = useMutation(LOGIN_USER);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -52,15 +54,12 @@ export default function CreateUser() {
           position: userInfo.position,
         },
       });
-      console.log(data);
-      setUserInfo({
-        username: "",
-        email: "",
-        password: "",
-        firstname: "",
-        lastname: "",
-        position: "",
+
+      const signIn = await loginUser({
+        variables: { email: userInfo.email, password: userInfo.password },
       });
+
+      Auth.login(signIn.data.login.token);
     } catch (error) {
       console.log(error);
     }
