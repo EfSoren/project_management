@@ -7,6 +7,9 @@ const teamSchema = new Schema({
     // type: String,
     type: Schema.Types.ObjectId
   },
+  teamname: {
+    type: String
+  },
   users: [{
     type: Schema.Types.ObjectId,
     ref: 'user'

@@ -5,7 +5,6 @@ const userSchema = require('./user');
 const taskSchema = new Schema({
   taskname: {
     type: String,
-    required: true
   },
   userId: [{
     type: Schema.Types.ObjectId,

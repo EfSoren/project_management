@@ -54,7 +54,7 @@ const resolvers = {
                 throw new AuthenticationError('Incorrect name or password.');
             }
             const token = signToken(user);
-            return { token };
+            return { token, user };
         },
         deleteUser: async (parent,{ _id }) => {
             return await User.findOneAndDelete({ _id });
