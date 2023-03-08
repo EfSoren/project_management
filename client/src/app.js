@@ -59,6 +59,13 @@ import Current from "./components/current_card";
 import LandingPage from "./components/landing_page";
 import Dashboard from "./components/dashboard";
 import Create from "./components/create_project";
+import {
+  ApolloClient,
+  InMemoryCache,
+  createHttpLink,
+  ApolloProvider,
+} from "@apollo/client";
+import { setContext } from "@apollo/client/link/context";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -66,18 +73,44 @@ function App() {
   const handleLogin = () => {
     setLoggedIn(true);
   };
+  const httpLink = createHttpLink({
+    uri: "/graphql",
+  });
 
-  const userId = "6405442e968973138d97f8e5";
+
+  // Construct request middleware that will attach the JWT token to every request as an `authorization` header
+  const authLink = setContext((_, { headers }) => {
+    // get the authentication token from local storage if it exists
+    const token = localStorage.getItem("id_token");
+    // return the headers to the context so httpLink can read them
+    return {
+      headers: {
+        ...headers,
+        authorization: token ? `Bearer ${token}` : "",
+      },
+    };
+  });
+
+  const client = new ApolloClient({
+    // Set up our client to execute the `authLink` middleware prior to making the request to our GraphQL API
+    link: authLink.concat(httpLink),
+    cache: new InMemoryCache(),
+  });
+
+
   return (
-    <Routes>
-      <Route path="/" element={<Nav />}>
-        <Route index element={<Cards />} />
-        <Route path="/single" element={<Current />} />
-        <Route path={`/${userId}`} element={<Cards />} />
-        <Route path="/:test" element={<Current />} />
-        <Route path="/create" element={<Create />} />
-      </Route>
-    </Routes>
+    <ApolloProvider client={client}>
+      <Routes>
+        <Route path="/" element={<Nav />}>
+          <Route index element={<Cards />} />
+          <Route path="single" element={<Current />} />
+          <Route path={`${userId}`} element={<Cards />} />
+          <Route path=":test" element={<Current />} />
+          <Route path="create" element={<Create />} />
+        </Route>
+      </Routes>
+    </ApolloProvider>
+
   );
 }
 
