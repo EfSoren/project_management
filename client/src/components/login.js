@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { LOGIN_USER } from "../utils/mutations";
 import Auth from "../utils/auth";
-
+import { Link } from "react-router-dom";
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -65,6 +65,9 @@ function Login() {
         <button type="submit">Submit</button>
       </form>
       <button onClick={handleTestSubmit}>Login as guest user</button>
+      <Link to="/home/createuser">
+        <button>Sign Up</button>
+      </Link>
     </>
   );
 }
