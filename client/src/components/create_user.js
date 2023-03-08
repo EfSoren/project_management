@@ -23,39 +23,36 @@ export default function CreateUser() {
     });
   };
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     // Preventing the default behavior of the form submit (which is to refresh the page)
     e.preventDefault();
 
     // First we check to see if the email is not valid or if the userName is empty. If so we set an error message to be displayed on the page.
-    if (
-      !validateEmail(userInfo.email) ||
-      !userInfo.username ||
-      !userInfo.firstname ||
-      !userInfo.lastname ||
-      !userInfo.password
-    ) {
-      setErrorMessage("Missing Input Fields");
-      // We want to exit out of this code block if something is wrong so that the user can correct it
-      return;
-      // Then we check to see if the password is not valid. If so, we set an error message regarding the password.
-    }
-    /* if (!checkPassword(userInfo.password)) {
-      setErrorMessage(
-        `Password must be between 7-14 letters and only include letters`
-      );
-      return;
-    } */
-    createUser({
-      variables: {
-        $username: userInfo.username,
-        $firstname: userInfo.firstname,
-        $lastname: userInfo.lastname,
-        $email: userInfo.email,
-        $password: userInfo.password,
-        $position: userInfo.position,
-      },
-    }).then(() =>
+    try {
+      if (
+        !validateEmail(userInfo.email) ||
+        !userInfo.username ||
+        !userInfo.firstname ||
+        !userInfo.lastname ||
+        !userInfo.password
+      ) {
+        setErrorMessage("Missing Input Fields");
+        console.log(setErrorMessage);
+        // We want to exit out of this code block if something is wrong so that the user can correct it
+        return;
+        // Then we check to see if the password is not valid. If so, we set an error message regarding the password.
+      }
+      const { data } = await createUser({
+        variables: {
+          username: userInfo.username,
+          password: userInfo.password,
+          email: userInfo.email,
+          firstname: userInfo.firstname,
+          lastname: userInfo.lastname,
+          position: userInfo.position,
+        },
+      });
+      console.log(data);
       setUserInfo({
         username: "",
         email: "",
@@ -63,8 +60,10 @@ export default function CreateUser() {
         firstname: "",
         lastname: "",
         position: "",
-      })
-    );
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <article className="project-container">

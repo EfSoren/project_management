@@ -29,18 +29,18 @@ export const CREATE_PROJECT = gql`
 export const CREATE_USER = gql`
   mutation createUser(
     $username: String!
+    $password: String!
+    $email: String!
     $firstname: String!
     $lastname: String!
-    $email: String!
-    $password: String!
     $position: String!
   ) {
     createUser(
       username: $username
+      password: $password
+      email: $email
       firstname: $firstname
       lastname: $lastname
-      email: $email
-      password: $password
       position: $position
     ) {
       _id
@@ -49,6 +49,7 @@ export const CREATE_USER = gql`
       username
       email
       password
+      position
     }
   }
 `;
