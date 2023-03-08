@@ -1,26 +1,26 @@
-import React, { useEffect, useState } from "react";
-import { QUERY_PROJECT } from "../utils/queries";
+import React from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
+import { QUERY_PROJECT } from "../utils/queries";
+
 function Current() {
-  const [currentProject, setCurrentProject] = useState({});
-  const { test } = useParams();
-  console.log("test :>> ", test);
-  const id = test;
+  const { projectId } = useParams();
   const { loading, data } = useQuery(QUERY_PROJECT, {
-    variables: { projectId: id },
+    variables: { projectId },
   });
 
-  const thought = data?.getProject || {};
   if (loading) {
     return <div>Loading...</div>;
   }
-  console.log(thought);
+
+  const project = data?.getProject || {};
+
   return (
     <section className="project-container">
-      <h1>{thought.projectName}</h1>
-      <h1>{thought.__typename}</h1>
-      <h1>{thought._id}</h1>
+      <h1>{project.projectName}</h1>
+      <h2>{project.__typename}</h2>
+      <p>{project._id}</p>
+      {/* Display other project details here */}
     </section>
   );
 }
