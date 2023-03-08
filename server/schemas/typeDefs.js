@@ -41,7 +41,7 @@ const typeDefs = gql`
     teams: [Team]
     tasks: [Task]
     getUser(userId: ID!): User
-    getTeam(teamId: ID!): Team
+    getTeam(teamId: ID!, users: ID!): Team
     getProject(projectId: ID!): Project
     getTask(taskId: ID!): Task
   }
@@ -50,7 +50,7 @@ const typeDefs = gql`
     createUser(firstname: String! ,lastname: String!): User
     login(email: String!, password: String!): Auth
     createProject(projectName: String! , status: String!, teams: ID!, endDate: String): Project
-    createTeam(users: ID!, project: ID!): Team
+    createTeam(user: String!, project: ID!): Team
     createTask(taskname: String!, userId: ID!, projectId: ID!): Task
     deleteUser(_id: ID!): User
     deleteProject(_id: ID!): Project
