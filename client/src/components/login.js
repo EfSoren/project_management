@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import { useMutation } from '@apollo/client';
+import { LOGIN_USER } from '../utils/mutations';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const [loginUser] = useMutation(LOGIN_USER);
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -16,8 +19,10 @@ function Login() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post('/api/login', { email, password });
-      localStorage.setItem('authToken', response.data.token);
+      const { data } = await loginUser({
+        variables: { email, password }
+      });
+      localStorage.setItem('authToken', data.loginUser.token);
       window.location.href = '/home';
     } catch (error) {
       console.log(error);
