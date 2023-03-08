@@ -49,7 +49,12 @@ const resolvers = {
             if (!user) {
                 throw new AuthenticationError("No user found");
             }
+
+            console.log(user.password);
+
+            console.log(password)
             const correctPW = await user.isCorrectPassword(password);
+            console.log(correctPW)
             if (!correctPW) {
                 throw new AuthenticationError('Incorrect name or password.');
             }
