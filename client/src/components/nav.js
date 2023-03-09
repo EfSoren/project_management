@@ -4,7 +4,6 @@ import { Link, Outlet } from "react-router-dom";
 import auth from "../utils/auth";
 import { useQuery } from "@apollo/client";
 import { QUERY_USER } from "../utils/queries";
-import "../assets/nav.css"
 import profileImg from "../assets/images/profile.jpg"
 
 function Nav() {

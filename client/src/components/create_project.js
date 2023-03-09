@@ -43,7 +43,8 @@ export default function Create() {
 
   return (
     <article className="project-container">
-      <form onSubmit={handleSubmit}>
+      <form className="createProjForm" onSubmit={handleSubmit}>
+        <h2>Create a Project:</h2>
         <input
           name="projectName"
           type="text"
@@ -65,7 +66,7 @@ export default function Create() {
           onChange={handleInputChange}
           placeholder="Deadline"
         />
-        <input type="submit" value="Create Project" />
+        <input class="submitBtn" type="submit" value="Create Project" />
       </form>
     </article>
   );
