@@ -1,16 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 import { useQuery } from "@apollo/client";
 import { Link } from "react-router-dom";
-import { QUERY_PROJECTS } from "../utils/queries";
+import { QUERY_USER, QUERY_TEAM } from "../utils/queries";
+import auth from "../utils/auth";
 
 function Cards() {
-  const { loading, data } = useQuery(QUERY_PROJECTS);
+  const [tokenId, setTokenId] = useState("");
+  const [teamId, setTeamId] = useState("");
+  /* const [getUser] = useQuery(QUERY_USER); */
+
+  const tokenInfo = async () => {
+    const tokenData = await auth.getProfile();
+    setTokenId(tokenData.data._id);
+  };
+  tokenInfo();
+  const { loading: userLoading, data: userData } = useQuery(QUERY_USER, {
+    variables: { userId: tokenId },
+  });
+
+  const team = userData?.getUser.team || "";
+  console.log(team);
+  const { loading, data: teamData } = useQuery(QUERY_TEAM, {
+    variables: { teamId: team },
+  });
 
   if (loading) {
     return <div>Loading...</div>;
   }
 
-  const projects = data?.projects || [];
+  const projects = teamData?.getTeam.project || [];
 
   function Card({ _id, projectName, __typename }) {
     return (

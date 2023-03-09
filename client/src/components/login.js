@@ -36,8 +36,8 @@ function Login() {
     try {
       const { data } = await loginUser({
         variables: {
-          email: "mgaskins@techfriends.dev",
-          password: "password07",
+          email: "guestuser@mail.com",
+          password: "password",
         },
       });
 
@@ -65,7 +65,7 @@ function Login() {
         <button type="submit">Submit</button>
       </form>
       <button onClick={handleTestSubmit}>Login as guest user</button>
-      <Link to="/home/createuser">
+      <Link to="/sign-up">
         <button>Sign Up</button>
       </Link>
     </>

@@ -8,6 +8,7 @@ export const QUERY_USER = gql`
       lastname
       position
       username
+      team
     }
   }
 `;
@@ -35,6 +36,22 @@ export const QUERY_PROJECTS = gql`
     projects {
       _id
       projectName
+    }
+  }
+`;
+
+export const QUERY_TEAM = gql`
+  query team($teamId: ID!) {
+    getTeam(teamId: $teamId) {
+      users {
+        _id
+        firstname
+        lastname
+      }
+      project {
+        _id
+        projectName
+      }
     }
   }
 `;

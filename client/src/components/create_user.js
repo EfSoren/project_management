@@ -3,6 +3,7 @@ import { checkPassword, validateEmail } from "../utils/helpers";
 import { CREATE_USER, LOGIN_USER } from "../utils/mutations";
 import { useMutation } from "@apollo/client";
 import Auth from "../utils/auth";
+import { Link } from "react-router-dom";
 export default function CreateUser() {
   const [userInfo, setUserInfo] = useState({
     username: "",
@@ -11,6 +12,7 @@ export default function CreateUser() {
     firstname: "",
     lastname: "",
     position: "",
+    team: "",
   });
 
   const [errorMessage, setErrorMessage] = useState("");
@@ -52,9 +54,10 @@ export default function CreateUser() {
           firstname: userInfo.firstname,
           lastname: userInfo.lastname,
           position: userInfo.position,
+          team: userInfo.team,
         },
       });
-
+      console.log(data);
       const signIn = await loginUser({
         variables: { email: userInfo.email, password: userInfo.password },
       });
@@ -89,6 +92,13 @@ export default function CreateUser() {
           placeholder="Username"
         />
         <input
+          name="team"
+          type="text"
+          value={userInfo.team}
+          onChange={handleInputChange}
+          placeholder="Team ID"
+        />
+        <input
           name="email"
           type="text"
           value={userInfo.email}
@@ -102,15 +112,26 @@ export default function CreateUser() {
           onChange={handleInputChange}
           placeholder="Password"
         />
-        <input
+        <select
+          id="position"
           name="position"
-          type="text"
           value={userInfo.position}
           onChange={handleInputChange}
           placeholder="Position"
-        />
+        >
+          <option value="Manager">Manager</option>
+          <option value="Finance">Finance</option>
+          <option value="Operations">Operations</option>
+          <option value="Marketing">Marketing</option>
+          <option value="Human Resources">Human Resources</option>
+          <option value="IT">IT</option>
+        </select>
+
         <input type="submit" value="Create User" />
       </form>
+      <Link to="/">
+        <button>Log In</button>
+      </Link>
     </article>
   );
 }

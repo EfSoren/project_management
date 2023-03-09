@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import Nav from "./components/nav";
 import Cards from "./components/cards";
-import Login from "./components/login"
+import Login from "./components/login";
 import Current from "./components/current_card";
 import Create from "./components/create_project";
 import CreateUser from "./components/create_user";
@@ -48,12 +48,12 @@ function App() {
     <ApolloProvider client={client}>
       <Routes>
         <Route path="/" element={<Login />} />
+        <Route path="sign-up" element={<CreateUser />} />
         <Route path="/home" element={<Nav />}>
           <Route index element={<Cards />} />
           <Route path="single" element={<Current />} />
           <Route path=":test" element={<Current />} />
           <Route path="create" element={<Create />} />
-          <Route path="createuser" element={<CreateUser />} />
         </Route>
       </Routes>
     </ApolloProvider>

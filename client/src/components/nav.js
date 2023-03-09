@@ -8,6 +8,10 @@ import { QUERY_USER } from "../utils/queries";
 function Nav() {
   // Query
   const userProfile = auth.getProfile();
+
+  if (!userProfile) {
+    window.location.assign("/");
+  }
   const userID = userProfile.data._id;
 
   const { loading, data } = useQuery(QUERY_USER, {
@@ -33,10 +37,7 @@ function Nav() {
           </section>
           <section className="nav-link-container">
             <Link to="/home">All Projects</Link>
-            <Link to="/home/single">Single Project</Link>
-            <Link to="/home/open">Status Project</Link>
             <Link to="/home/create">Create Project</Link>
-            <Link to="/home/createuser">Create User</Link>
           </section>
           <section className="nav-logout">
             <Logout />
