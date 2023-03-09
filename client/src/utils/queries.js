@@ -20,6 +20,12 @@ export const QUERY_PROJECT = gql`
       description
       createdAt
       endDate
+      teams {
+        users {
+          firstname
+          lastname
+        }
+      }
     }
   }
 `;
