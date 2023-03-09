@@ -13,7 +13,7 @@ body {
 }
 
 #root {
-  min-height: 100vh;
+  height: 100vh;
   width: 100%;
   background-image: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.2));
 }
@@ -32,8 +32,8 @@ nav {
   ); */
 }
 .profileImg {
-  height: 200px;
-  width: 200px;
+  height: auto;
+  width: 75%;
 }
 .nav-profile {
   margin-top: 10px;
@@ -51,6 +51,10 @@ nav {
   align-items: center;
   justify-content: space-around;
 }
+.profileInfo {
+  margin: auto auto;
+  text-align: center;
+}
 .nav-link-container {
   display: flex;
   margin-top: 1rem;
@@ -63,15 +67,11 @@ nav {
   text-decoration: none;
   color: white;
 }
+.nav-link-container button {
+  width: fit-content;
+}
 .project-container {
-  background-image: linear-gradient(
-    to bottom right,
-    /* rgba(202, 61, 84, 0.904),
-    rgba(141, 24, 43, 0.911),
-    rgb(8, 7, 61),
-    rgba(23, 82, 100, 0.877),
-    rgb(149, 219, 240) */
-  );
+  background-color:rgba(23, 82, 100, 0.877);
   box-shadow: 0 5px 5px 1px black;
   border-radius: 25px;
   padding: 3rem 1rem;
@@ -101,7 +101,7 @@ nav {
   position: relative;
   left: 50%;
   top: 20%;
-  width: 100%;
+  width: auto;
   border-style: solid;
   border-color: white;
   height: 45%;
@@ -121,4 +121,102 @@ nav {
 
 
 
+@media (max-width: 1023px) {
+body {
+  background-image: none;
+  background-color: crimson;
+}
+#root {
+  height: 100vh;
+  width: 100%;
+  background-image: none;
+}
+.project-container {
+  grid-template-columns: 80%;
+  position: relative;
+  margin: 15% auto 0;
+}
+nav {
+  height: 15%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  color: white;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.4));
+  /*  background-image: linear-gradient(
+    to bottom right,
+    rgb(61, 98, 219),
+    rgb(8, 7, 61)
+  ); */
+}
+.profileImg {
+ display: none;
+}
+.nav-wrapper {
+  width: 100%;
+  flex-direction: column;
+  position: absolute;
+  top: 10%;
+}
+.nav-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+.nav-header .profileInfo{
+  margin: 0;
+}
+.nav-link-container {
+  display: flex;
+  margin-top: 1rem;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+.createProjForm { 
+  position: relative;
+  left: 0;
+  top: 0;
+  width: auto;
+  border-style: solid;
+  border-color: white;
+  height: 45%;
+  padding: 0 10px;
+}
+
+
+
+}
+
+
+
+@media (max-width: 767px) {
+.project-container {
+  grid-template-columns: 95%;
+  top: 15%;
+}
+.createProjForm { 
+  position: relative;
+  left: 0;
+  top: 0;
+  width: auto;
+  border-style: solid;
+  border-color: white;
+  height: 45%;
+  padding: 0 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+}
 
