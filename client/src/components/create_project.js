@@ -33,6 +33,7 @@ export default function Create() {
         },
       });
       console.log(data);
+      window.location.assign("/home");
     } catch (error) {
       console.log(error);
     }

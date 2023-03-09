@@ -36,7 +36,7 @@ const resolvers = {
       parent,
       { username, password, email, firstname, lastname, position, team }
     ) => {
-      return await User.create({
+      const newUser = await User.create({
         username,
         password: password,
         email,
@@ -45,12 +45,28 @@ const resolvers = {
         position,
         team,
       });
+      const updateTeam = await Team.findOneAndUpdate(
+        { _id: newUser.team },
+        { $addToSet: { users: newUser._id } }
+      );
+      return newUser;
     },
     createProject: async (
       parent,
       { projectName, description, teams, endDate }
     ) => {
-      return await Project.create({ projectName, description, teams, endDate });
+      const newProject = await Project.create({
+        projectName,
+        description,
+        teams,
+        endDate,
+      });
+      console.log(newProject);
+      const updateTeam = await Team.findOneAndUpdate(
+        { _id: newProject.teams },
+        { $addToSet: { project: newProject._id } }
+      );
+      return newProject;
     },
     createTeam: async (parent, { users, project }) => {
       return await Team.create({ users, project });

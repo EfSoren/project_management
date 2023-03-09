@@ -20,12 +20,11 @@ const projectSchema = new Schema({
   description: {
     type: String,
   },
-  teams: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "team",
-    },
-  ],
+  teams: {
+    type: Schema.Types.ObjectId,
+    ref: "team",
+  },
+
   createdAt: {
     type: Date,
     default: Date.now(),
