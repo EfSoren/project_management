@@ -21,7 +21,9 @@ const resolvers = {
       return User.findById(userId);
     },
     getProject: async (parent, { projectId }) => {
-      return await Project.findById(projectId);
+      return await Project.findById(projectId)
+        .populate("teams")
+        .populate({ path: "teams", populate: "users" });
     },
     getTeam: async (parent, { teamId }) => {
       return await Team.findById(teamId).populate("project").populate("users");

@@ -20,6 +20,12 @@ export const QUERY_PROJECT = gql`
       description
       createdAt
       endDate
+      teams {
+        users {
+          firstname
+          lastname
+        }
+      }
     }
   }
 `;
@@ -39,6 +45,7 @@ export const QUERY_PROJECTS = gql`
     projects {
       _id
       projectName
+      description
     }
   }
 `;
@@ -54,6 +61,8 @@ export const QUERY_TEAM = gql`
       project {
         _id
         projectName
+        description
+        endDate
       }
     }
   }

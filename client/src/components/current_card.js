@@ -45,19 +45,28 @@ function Current() {
       return <h3>{projDescription}</h3>;
     }
   };
+
+  console.log(project.teams[0].users[0]);
+  const teamList = project.teams[0].users;
+  function Team({ firstname, lastname }) {
+    return (
+      <li>
+        {" "}
+        {firstname} {lastname}
+      </li>
+    );
+  }
   return (
     <section className="single-project-wrapper">
       <h1 className="single-project-title">{project.projectName}</h1>
       {checkDes()}
       <p>
-        Created on: {localCreate}
-        {/* {createdTime.getMonth() + 1}/{createdTime.getDate()}/
-        {createdTime.getFullYear()}{" "} */}
+        Created on: {createdTime.getMonth() + 1}/{createdTime.getDate()}/
+        {createdTime.getFullYear()}{" "}
       </p>
       <p>
-        Project Deadline: {localEnd}
-        {/* {endTime.getMonth() + 1}/{endTime.getDate()}/
-        {endTime.getFullYear()}{" "} */}
+        Project Deadline: {endTime.getMonth() + 1}/{endTime.getDate()}/
+        {endTime.getFullYear()}{" "}
       </p>
       <p>{project._id}</p>
       {/* Display other project details here */}
