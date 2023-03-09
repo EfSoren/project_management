@@ -48,9 +48,9 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="sign-up" element={<CreateUser />} />
-        <Route path="/home" element={<Nav />}>
+          <Route path="/" element={<Login />} />
+          <Route path="sign-up" element={<CreateUser />} />
+          <Route path="home" element={<Nav />}>
           <Route index element={<Cards />} />
           <Route path="single" element={<Current />} />
           <Route path=":projectId" element={<Current />} />
