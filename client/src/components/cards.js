@@ -6,6 +6,7 @@ import auth from "../utils/auth";
 
 
 function Cards() {
+  const linkStyle = { textDecorationLine: "none", textDecoration: "none"}
   const [tokenId, setTokenId] = useState("");
   const [teamId, setTeamId] = useState("");
   /* const [getUser] = useQuery(QUERY_USER); */
@@ -25,21 +26,25 @@ function Cards() {
     variables: { teamId: team },
   });
 
+  
   if (loading) {
     return <div id="loading">Loading...</div>;
   }
 
   const projects = teamData?.getTeam.project || [];
   console.log(projects);
+
   function Card({ _id, projectName, __typename }) {
+    const ProjectCardBtn = async (event) => {
+      window.location.assign(`/home/${_id}`)
+    }
+
     return (
-      <Link to={`/home/${_id}`}>
-        <article className="project-card">
-          <h1>{projectName}</h1>
+        <article className="project-card" onClick={ProjectCardBtn}>
+          <h1 style={linkStyle}>{projectName}</h1>
           <h2>{__typename}</h2>
           <p>{_id}</p>
         </article>
-      </Link>
     );
   }
 

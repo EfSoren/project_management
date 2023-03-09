@@ -58,11 +58,11 @@ nav {
 .project-container {
   background-image: linear-gradient(
     to bottom right,
-    rgba(202, 61, 84, 0.904),
+    /* rgba(202, 61, 84, 0.904),
     rgba(141, 24, 43, 0.911),
     rgb(8, 7, 61),
     rgba(23, 82, 100, 0.877),
-    rgb(149, 219, 240)
+    rgb(149, 219, 240) */
   );
   box-shadow: 0 5px 5px 1px black;
   border-radius: 25px;
@@ -86,5 +86,10 @@ nav {
   border-radius: 10px;
   padding: 1rem;
 }
+.project-card:hover {
+  cursor: pointer;
+}
+
+
 
 
