@@ -8,6 +8,10 @@ import { QUERY_USER } from "../utils/queries";
 function Nav() {
   // Query
   const userProfile = auth.getProfile();
+
+  if (!userProfile) {
+    window.location.assign("/");
+  }
   const userID = userProfile.data._id;
 
   const { loading, data } = useQuery(QUERY_USER, {

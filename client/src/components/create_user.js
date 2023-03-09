@@ -12,6 +12,7 @@ export default function CreateUser() {
     firstname: "",
     lastname: "",
     position: "",
+    team: "",
   });
 
   const [errorMessage, setErrorMessage] = useState("");
@@ -53,9 +54,10 @@ export default function CreateUser() {
           firstname: userInfo.firstname,
           lastname: userInfo.lastname,
           position: userInfo.position,
+          team: userInfo.team,
         },
       });
-
+      console.log(data);
       const signIn = await loginUser({
         variables: { email: userInfo.email, password: userInfo.password },
       });
@@ -88,6 +90,13 @@ export default function CreateUser() {
           value={userInfo.username}
           onChange={handleInputChange}
           placeholder="Username"
+        />
+        <input
+          name="team"
+          type="text"
+          value={userInfo.team}
+          onChange={handleInputChange}
+          placeholder="Team ID"
         />
         <input
           name="email"

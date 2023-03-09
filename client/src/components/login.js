@@ -36,8 +36,8 @@ function Login() {
     try {
       const { data } = await loginUser({
         variables: {
-          email: "mgaskins@techfriends.dev",
-          password: "password07",
+          email: "guestuser@mail.com",
+          password: "password",
         },
       });
 

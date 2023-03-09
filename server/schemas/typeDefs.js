@@ -15,6 +15,8 @@ const typeDefs = gql`
   type Team {
     _id: ID
     teamId: String
+    project: [Project]
+    users: [User]
   }
 
   type Project {
@@ -41,7 +43,7 @@ const typeDefs = gql`
     teams: [Team]
     tasks: [Task]
     getUser(userId: ID!): User
-    getTeam(teamId: ID!, users: ID!): Team
+    getTeam(teamId: ID!): Team
     getProject(projectId: ID!): Project
     getTask(taskId: ID!): Task
   }
