@@ -29,5 +29,15 @@ label, input {
 
 
 button {
-    width: 20%;
+    width: fit-content;
+}
+
+@media (max-width: 767px) {
+    .btnContainer {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        margin: 10px 10px;
+    }
 }
