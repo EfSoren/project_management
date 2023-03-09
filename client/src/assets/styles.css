@@ -118,6 +118,10 @@ nav {
   color: white;
   font-size: larger;
 }
+.single-project-wrapper {
+  background-image: none;
+  background-color:rgba(23, 82, 100, 0.877);
+}
 
 
 
