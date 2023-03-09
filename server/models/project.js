@@ -31,7 +31,7 @@ const projectSchema = new Schema({
   },
   endDate: {
     type: Date,
-    default: () => new Date(+new Date() + 84 * 24 * 60 * 60 * 1000),
+    default: () => new Date(+new Date() + 14 * 24 * 60 * 60 * 1000),
   },
 });
 
