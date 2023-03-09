@@ -1,55 +1,38 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import React, { useState } from "react";
 import { useQuery } from "@apollo/client";
 import { Link } from "react-router-dom";
-import { QUERY_PROJECTS, QUERY_TEST, QUERY_USER } from "../utils/queries";
+import { QUERY_USER, QUERY_TEAM } from "../utils/queries";
+import auth from "../utils/auth";
+
 function Cards() {
-  const cardArray = [
-    {
-      title: "Group Project 1",
-      manager: "Ethan Sorensen",
-      notes:
-        "notes, notes, notes, notes, notes, notes, notes, notes, notes, notes, ",
-    },
-    {
-      title: "Project Demonstration",
-      manager: "Jett Crowther",
-      notes:
-        "notes, notes, notes, notes, notes, notes, notes, notes, notes, notes, ",
-    },
-    {
-      title: "Party Planning",
-      manager: "Ethan Sorensen",
-      notes:
-        "notes, notes, notes, notes, notes, notes, notes, notes, notes, notes, ",
-    },
-    {
-      title: "Production Test",
-      manager: "Athena King",
-      notes:
-        "notes, notes, notes, notes, notes, notes, notes, notes, notes, notes, ",
-    },
-    {
-      title: "Project Completion ",
-      manager: "Matt Gaskins",
-      notes:
-        "notes, notes, notes, notes, notes, notes, notes, notes, notes, notes, ",
-    },
-  ];
-  const [projects, setProjects] = useState(cardArray);
+  const [tokenId, setTokenId] = useState("");
+  const [teamId, setTeamId] = useState("");
+  /* const [getUser] = useQuery(QUERY_USER); */
 
-  const id = "6405442e968973138d97f8e5";
-  const { loading, data } = useQuery(QUERY_PROJECTS);
+  const tokenInfo = async () => {
+    const tokenData = await auth.getProfile();
+    setTokenId(tokenData.data._id);
+  };
+  tokenInfo();
+  const { loading: userLoading, data: userData } = useQuery(QUERY_USER, {
+    variables: { userId: tokenId },
+  });
 
-  const thought = data?.projects || {};
+  const team = userData?.getUser.team || "";
+  console.log(team);
+  const { loading, data: teamData } = useQuery(QUERY_TEAM, {
+    variables: { teamId: team },
+  });
 
   if (loading) {
     return <div>Loading...</div>;
   }
-  console.log(thought);
-  function Card({ projectName, __typename, _id }) {
+
+  const projects = teamData?.getTeam.project || [];
+  console.log(projects);
+  function Card({ _id, projectName, __typename }) {
     return (
-      <Link to={`/${_id}`}>
+      <Link to={`/home/${_id}`}>
         <article className="project-card">
           <h1>{projectName}</h1>
           <h2>{__typename}</h2>
@@ -60,13 +43,11 @@ function Cards() {
   }
 
   return (
-    <>
-      <section className="project-container">
-        {thought.slice(0, 6).map((item, index) => (
-          <Card key={index} {...item} />
-        ))}
-      </section>
-    </>
+    <section className="project-container">
+      {projects.slice(0, 6).map((project) => (
+        <Card key={project._id} {...project} />
+      ))}
+    </section>
   );
 }
 

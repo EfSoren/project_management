@@ -1,88 +1,69 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { CREATE_PROJECT } from "../utils/mutations";
-
+import auth from "../utils/auth";
 export default function Create() {
-  const [projectName, setProjectName] = useState("");
-  const [projectManager, setProjectManager] = useState("");
-  const [projectDescription, setProjectDescription] = useState("");
-  const [projectEndDate, setProjectEndDate] = useState("");
-  const [team, setTeam] = useState("");
-  const [teamId, setTeamId] = useState("");
-
+  const userProfile = auth.getProfile();
+  const teamID = userProfile.data.team;
+  const [formState, setFormState] = useState({
+    projectName: "",
+    projectDescription: "",
+    projectEndDate: "",
+    teams: teamID,
+  });
   const [createProject] = useMutation(CREATE_PROJECT);
 
   const handleInputChange = (e) => {
-    const { target } = e;
-    const inputType = target.name;
-    const inputValue = target.value;
-
-    if (inputType === "projectName") {
-      setProjectName(inputValue);
-    } else if (inputType === "projectManager") {
-      setProjectManager(inputValue);
-    } else if (inputType === "projectDescription") {
-      setProjectDescription(inputValue);
-    } else if (inputType === "projectEndDate") {
-      setProjectEndDate(inputValue);
-    }
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  
-    createProject({
-      variables: {
-        name: projectName,
-        manager: projectManager,
-        description: projectDescription,
-        endDate: projectEndDate,
-        teamId: teamId,
-      },
-    }).then(() => {
-      setProjectName("");
-      setProjectManager("");
-      setProjectDescription("");
-      setProjectEndDate("");
-      setTeam("");
-      setTeamId("");
+    const { name, value } = e.target;
+    setFormState({
+      ...formState,
+      [name]: value,
     });
   };
-  
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const { data } = await createProject({
+        variables: {
+          projectName: formState.projectName,
+          description: formState.projectDescription,
+          teams: formState.teams,
+          endDate: formState.projectEndDate,
+        },
+      });
+      console.log(data);
+      window.location.assign("/home");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <article className="project-container">
       <form onSubmit={handleSubmit}>
         <input
-          value={projectName}
           name="projectName"
           type="text"
+          value={formState.projectName}
           onChange={handleInputChange}
           placeholder="Project Name"
-        ></input>
+        />
         <input
-          value={projectManager}
-          name="projectManager"
-          type="text"
-          onChange={handleInputChange}
-          placeholder="Manager"
-        ></input>
-        <input
-          value={projectDescription}
           name="projectDescription"
           type="text"
+          value={formState.projectDescription}
           onChange={handleInputChange}
           placeholder="Description"
-        ></input>
+        />
         <input
-          value={projectEndDate}
           name="projectEndDate"
           type="date"
+          value={formState.projectEndDate}
           onChange={handleInputChange}
           placeholder="Deadline"
-        ></input>
-
-        <input type="submit" value="Create Project"></input>
+        />
+        <input type="submit" value="Create Project" />
       </form>
     </article>
   );
