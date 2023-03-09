@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { CREATE_PROJECT } from "../utils/mutations";
-
+import auth from "../utils/auth";
 export default function Create() {
+  const userProfile = auth.getProfile();
+  const teamID = userProfile.data.team;
   const [formState, setFormState] = useState({
     projectName: "",
-    projectManager: "",
     projectDescription: "",
     projectEndDate: "",
-    teamId: "",
+    teams: teamID,
   });
-
   const [createProject] = useMutation(CREATE_PROJECT);
 
   const handleInputChange = (e) => {
@@ -21,17 +21,21 @@ export default function Create() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    createProject({ variables: formState }).then(() =>
-      setFormState({
-        projectName: "",
-        projectManager: "",
-        projectDescription: "",
-        projectEndDate: "",
-        teamId: "",
-      })
-    );
+    try {
+      const { data } = await createProject({
+        variables: {
+          projectName: formState.projectName,
+          description: formState.projectDescription,
+          teams: formState.teams,
+          endDate: formState.projectEndDate,
+        },
+      });
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -43,13 +47,6 @@ export default function Create() {
           value={formState.projectName}
           onChange={handleInputChange}
           placeholder="Project Name"
-        />
-        <input
-          name="projectManager"
-          type="text"
-          value={formState.projectManager}
-          onChange={handleInputChange}
-          placeholder="Manager"
         />
         <input
           name="projectDescription"

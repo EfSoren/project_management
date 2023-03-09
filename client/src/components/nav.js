@@ -21,7 +21,7 @@ function Nav() {
     return <div>Loading...</div>;
   }
   const { username, firstname, lastname, position, _id } = data?.getUser || {};
-
+  console.log(data?.getUser);
   return (
     <>
       <nav className="nav-container">
@@ -44,7 +44,7 @@ function Nav() {
           </section>
         </div>
       </nav>
-      <Outlet />
+      <Outlet userID={userID} />
     </>
   );
 }

@@ -1,27 +1,21 @@
 import { gql } from "@apollo/client";
 export const CREATE_PROJECT = gql`
-  mutation createProject(
-    $name: String!
-    $manager: String!
+  mutation Mutation(
+    $projectName: String!
     $description: String!
-    $endDate: String!
-    $teamId: String!
+    $teams: ID!
+    $endDate: String
   ) {
     createProject(
-      input: {
-        name: $name
-        manager: $manager
-        description: $description
-        endDate: $endDate
-        teamId: $teamId
-      }
+      projectName: $projectName
+      description: $description
+      teams: $teams
+      endDate: $endDate
     ) {
-      id
-      name
-      manager
+      _id
       description
+      projectName
       endDate
-      teamId
     }
   }
 `;
