@@ -45,6 +45,7 @@ export const QUERY_PROJECTS = gql`
     projects {
       _id
       projectName
+      description
     }
   }
 `;
@@ -60,6 +61,8 @@ export const QUERY_TEAM = gql`
       project {
         _id
         projectName
+        description
+        endDate
       }
     }
   }

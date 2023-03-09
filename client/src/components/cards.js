@@ -4,9 +4,8 @@ import { Link } from "react-router-dom";
 import { QUERY_USER, QUERY_TEAM } from "../utils/queries";
 import auth from "../utils/auth";
 
-
 function Cards() {
-  const linkStyle = { textDecorationLine: "none", textDecoration: "none"}
+  const linkStyle = { textDecorationLine: "none", textDecoration: "none" };
   const [tokenId, setTokenId] = useState("");
   const [teamId, setTeamId] = useState("");
   /* const [getUser] = useQuery(QUERY_USER); */
@@ -26,7 +25,6 @@ function Cards() {
     variables: { teamId: team },
   });
 
-  
   if (loading) {
     return <div id="loading">Loading...</div>;
   }
@@ -34,17 +32,17 @@ function Cards() {
   const projects = teamData?.getTeam.project || [];
   console.log(projects);
 
-  function Card({ _id, projectName, __typename }) {
+  function Card({ _id, projectName, __typename, description }) {
     const ProjectCardBtn = async (event) => {
-      window.location.assign(`/home/${_id}`)
-    }
+      window.location.assign(`/home/${_id}`);
+    };
 
     return (
-        <article className="project-card" onClick={ProjectCardBtn}>
-          <h1 style={linkStyle}>{projectName}</h1>
-          <h2>{__typename}</h2>
-          <p>{_id}</p>
-        </article>
+      <article className="project-card" onClick={ProjectCardBtn}>
+        <h1 style={linkStyle}>{projectName}</h1>
+        <h2>{description}</h2>
+        <p>{_id}</p>
+      </article>
     );
   }
 
