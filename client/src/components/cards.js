@@ -29,7 +29,7 @@ function Cards() {
   }
 
   const projects = teamData?.getTeam.project || [];
-
+  console.log(projects);
   function Card({ _id, projectName, __typename }) {
     return (
       <Link to={`/home/${_id}`}>

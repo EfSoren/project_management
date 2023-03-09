@@ -52,7 +52,7 @@ function App() {
         <Route path="/home" element={<Nav />}>
           <Route index element={<Cards />} />
           <Route path="single" element={<Current />} />
-          <Route path=":test" element={<Current />} />
+          <Route path=":projectId" element={<Current />} />
           <Route path="create" element={<Create />} />
         </Route>
       </Routes>
