@@ -1,10 +1,11 @@
 import React from "react";
 import { Link, Outlet } from "react-router-dom";
-import "../assets/styles.css";
 import Logout from "./logout";
 import auth from "../utils/auth";
 import { useQuery } from "@apollo/client";
 import { QUERY_USER } from "../utils/queries";
+
+
 function Nav() {
   // Query
   const userProfile = auth.getProfile();

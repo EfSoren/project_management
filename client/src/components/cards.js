@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { QUERY_USER, QUERY_TEAM } from "../utils/queries";
 import auth from "../utils/auth";
 
+
 function Cards() {
   const [tokenId, setTokenId] = useState("");
   const [teamId, setTeamId] = useState("");
@@ -25,7 +26,7 @@ function Cards() {
   });
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div id="loading">Loading...</div>;
   }
 
   const projects = teamData?.getTeam.project || [];

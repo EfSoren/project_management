@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { QUERY_PROJECT } from "../utils/queries";
 
+
+
 function Current() {
   const { projectId } = useParams();
   const { loading, data } = useQuery(QUERY_PROJECT, {

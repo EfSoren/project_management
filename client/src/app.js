@@ -6,6 +6,7 @@ import Login from "./components/login";
 import Current from "./components/current_card";
 import Create from "./components/create_project";
 import CreateUser from "./components/create_user";
+import "./assets/styles.css"
 import {
   ApolloClient,
   InMemoryCache,
@@ -13,7 +14,7 @@ import {
   ApolloProvider,
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
-
+// import './assets/style.css'
 const httpLink = createHttpLink({
   uri: "/graphql",
 });
