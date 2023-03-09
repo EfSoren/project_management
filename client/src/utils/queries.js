@@ -17,6 +17,9 @@ export const QUERY_PROJECT = gql`
     getProject(projectId: $projectId) {
       _id
       projectName
+      description
+      createdAt
+      endDate
     }
   }
 `;
