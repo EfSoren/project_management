@@ -26,13 +26,22 @@ function Cards() {
   });
 
   if (loading) {
-    return <div id="loading">Loading...</div>;
+    return <div id="Loading">Loading...</div>;
+  }
+
+  function formatDate(date) {
+    const convertNum = Number(date);
+    const convertDate = new Date(convertNum);
+    const convertLocal = convertDate.toLocaleDateString("en-US");
+    console.log(convertLocal);
+    return convertLocal
   }
 
   const projects = teamData?.getTeam.project || [];
   console.log(projects);
+  const testDate = formatDate(projects[0].endDate);
 
-  function Card({ _id, projectName, __typename, description }) {
+  function Card({ _id, projectName, endDate, __typename, description }) {
     const ProjectCardBtn = async (event) => {
       window.location.assign(`/home/${_id}`);
     };
@@ -41,7 +50,7 @@ function Cards() {
       <article className="project-card" onClick={ProjectCardBtn}>
         <h1 style={linkStyle}>{projectName}</h1>
         <h2>{description}</h2>
-        <p>{_id}</p>
+        <p>Due Date: {formatDate(endDate)}</p>
       </article>
     );
   }

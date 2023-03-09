@@ -16,12 +16,12 @@ function Current() {
   const project = data?.getProject || {};
   const createdAtTime = Number(project.createdAt);
   const enddateAtTime = Number(project.endDate);
-  console.log(createdAtTime, enddateAtTime);
+  // console.log(createdAtTime, enddateAtTime);
   const convertCreated = new Date(createdAtTime);
   const convertEndDate = new Date(enddateAtTime);
-  console.log(convertCreated, convertEndDate);
-  console.log(convertCreated.toLocaleDateString("en-US"));
-  console.log(convertEndDate.toLocaleDateString("en-US"));
+  // console.log(convertCreated, convertEndDate);
+  // console.log(convertCreated.toLocaleDateString("en-US"));
+  // console.log(convertEndDate.toLocaleDateString("en-US"));
   const localCreate = convertCreated.toLocaleDateString("en-US");
   const localEnd = convertEndDate.toLocaleDateString("en-US");
 
@@ -61,12 +61,14 @@ function Current() {
       <h1 className="single-project-title">{project.projectName}</h1>
       {checkDes()}
       <p>
-        Created on: {createdTime.getMonth() + 1}/{createdTime.getDate()}/
-        {createdTime.getFullYear()}{" "}
+        Created on: {localCreate}
+        {/* {createdTime.getMonth() + 1}/{createdTime.getDate()}/
+        {createdTime.getFullYear()}{" "} */}
       </p>
       <p>
-        Project Deadline: {endTime.getMonth() + 1}/{endTime.getDate()}/
-        {endTime.getFullYear()}{" "}
+        Project Deadline: {localEnd}
+        {/* {endTime.getMonth() + 1}/{endTime.getDate()}/
+        {endTime.getFullYear()}{" "} */}
       </p>
       <p>{project._id}</p>
       {/* Display other project details here */}
