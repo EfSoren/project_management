@@ -6,11 +6,12 @@
     top: 30%;
     width: 50%;
     border-style: solid;
-    border-color: black; 
+    border-color: white; 
     padding: 10px;
 }
 
 form {
+    color: white;
     display: flex;
     flex-direction: column;
 }

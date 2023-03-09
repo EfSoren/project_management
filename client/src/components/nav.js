@@ -1,14 +1,20 @@
 import React from "react";
 import { Link, Outlet } from "react-router-dom";
-import Logout from "./logout";
+// import Logout from "./logout";
 import auth from "../utils/auth";
 import { useQuery } from "@apollo/client";
 import { QUERY_USER } from "../utils/queries";
-
+import "../assets/nav.css"
+import profileImg from "../assets/images/profile.jpg"
 
 function Nav() {
   // Query
   const userProfile = auth.getProfile();
+
+  const handleLogout = () => {
+    localStorage.removeItem("id_token");
+    window.location.assign("/");
+  };
 
   if (!userProfile) {
     window.location.assign("/");
@@ -19,7 +25,7 @@ function Nav() {
     variables: { userId: userID },
   });
   if (loading) {
-    return <div>Loading...</div>;
+    return <div id="Loading">Loading...</div>;
   }
   const { username, firstname, lastname, position, _id } = data?.getUser || {};
   console.log(data?.getUser);
@@ -28,20 +34,14 @@ function Nav() {
       <nav className="nav-container">
         <div className="nav-wrapper">
           <section className="nav-header">
-            <p className="psuedoImage">Image</p>
-            <div className="nav-profile">
-              <h1>
-                {firstname} {lastname}
-              </h1>
-              <h2>{position}</h2>
-            </div>
+            <img src={profileImg} className="profileImg" alt=".."/>
+            <h2 className="profileInfo">{firstname} {lastname}</h2>
+            <h3 className="profileInfo">{position}</h3> 
           </section>
           <section className="nav-link-container">
             <Link to="/home">All Projects</Link>
             <Link to="/home/create">Create Project</Link>
-          </section>
-          <section className="nav-logout">
-            <Logout />
+            <button onClick={handleLogout}>Logout</button>
           </section>
         </div>
       </nav>
