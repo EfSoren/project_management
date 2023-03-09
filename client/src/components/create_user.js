@@ -14,23 +14,22 @@ export default function CreateUser() {
     position: "",
     team: "",
   });
-
   const [errorMessage, setErrorMessage] = useState("");
   const [createUser] = useMutation(CREATE_USER);
   const [loginUser] = useMutation(LOGIN_USER);
-
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setUserInfo({
       ...userInfo,
       [name]: value,
     });
+    // console.log(value);
+    // console.log(userInfo);
   };
-
   const handleFormSubmit = async (e) => {
     // Preventing the default behavior of the form submit (which is to refresh the page)
     e.preventDefault();
-
+    console.log(userInfo);
     // First we check to see if the email is not valid or if the userName is empty. If so we set an error message to be displayed on the page.
     try {
       if (
@@ -57,11 +56,10 @@ export default function CreateUser() {
           team: userInfo.team,
         },
       });
-      console.log(data);
+      // console.log(data);
       const signIn = await loginUser({
         variables: { email: userInfo.email, password: userInfo.password },
       });
-
       Auth.login(signIn.data.login.token);
     } catch (error) {
       console.log(error);
@@ -100,7 +98,7 @@ export default function CreateUser() {
         />
         <input
           name="email"
-          type="text"
+          type="email"
           value={userInfo.email}
           onChange={handleInputChange}
           placeholder="Email"
@@ -126,7 +124,6 @@ export default function CreateUser() {
           <option value="Human Resources">Human Resources</option>
           <option value="IT">IT</option>
         </select>
-
         <input type="submit" value="Create User" />
       </form>
       <Link to="/">

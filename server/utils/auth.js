@@ -1,7 +1,7 @@
-const jwt = require('jsonwebtoken');
+const jwt = require("jsonwebtoken");
 
-const secret = 'secret';
-const expiration = '10h';
+const secret = "secret";
+const expiration = "10h";
 
 module.exports = {
   authMiddleware: function ({ req }) {
@@ -10,7 +10,7 @@ module.exports = {
 
     // We split the token string into an array and return actual token
     if (req.headers.authorization) {
-      token = token.split(' ').pop().trim();
+      token = token.split(" ").pop().trim();
     }
 
     if (!token) {
@@ -22,14 +22,14 @@ module.exports = {
       const { data } = jwt.verify(token, secret, { maxAge: expiration });
       req.user = data;
     } catch {
-      console.log('Invalid token');
+      console.log("Invalid token");
     }
 
     // return the request object so it can be passed to the resolver as `context`
     return req;
   },
-  signToken: function ({ email, username, _id }) {
-    const payload = { email, username, _id };
+  signToken: function ({ email, username, _id, team }) {
+    const payload = { email, username, _id, team };
     return jwt.sign({ data: payload }, secret, { expiresIn: expiration });
   },
 };

@@ -32,7 +32,7 @@ function Cards() {
 
   function Card({ _id, projectName, __typename }) {
     return (
-      <Link to={`/${_id}`}>
+      <Link to={`/home/${_id}`}>
         <article className="project-card">
           <h1>{projectName}</h1>
           <h2>{__typename}</h2>

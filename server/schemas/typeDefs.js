@@ -23,6 +23,9 @@ const typeDefs = gql`
     _id: ID
     projectName: String
     status: String
+    description: String
+    createdAt: String
+    endDate: String
   }
 
   type Auth {
@@ -61,7 +64,7 @@ const typeDefs = gql`
     login(email: String!, password: String!): Auth
     createProject(
       projectName: String!
-      status: String!
+      description: String!
       teams: ID!
       endDate: String
     ): Project

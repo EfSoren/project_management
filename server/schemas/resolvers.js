@@ -46,8 +46,11 @@ const resolvers = {
         team,
       });
     },
-    createProject: async (parent, { projectName, status, teams, endDate }) => {
-      return await Project.create({ projectName, status, teams, endDate });
+    createProject: async (
+      parent,
+      { projectName, description, teams, endDate }
+    ) => {
+      return await Project.create({ projectName, description, teams, endDate });
     },
     createTeam: async (parent, { users, project }) => {
       return await Team.create({ users, project });
