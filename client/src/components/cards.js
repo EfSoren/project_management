@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { useQuery } from "@apollo/client";
-import { Link } from "react-router-dom";
 import { QUERY_USER, QUERY_TEAM } from "../utils/queries";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import auth from "../utils/auth";
 
 function Cards() {
+  const navigate = useNavigate();
   const linkStyle = { textDecorationLine: "none", textDecoration: "none" };
   const [tokenId, setTokenId] = useState("");
   const [teamId, setTeamId] = useState("");
@@ -43,7 +44,8 @@ function Cards() {
 
   function Card({ _id, projectName, endDate, __typename, description }) {
     const ProjectCardBtn = async (event) => {
-      window.location.assign(`/home/${_id}`);
+      // window.location.assign(`/home/${_id}`);
+      navigate(`/home/${_id}`)
     };
 
     return (
