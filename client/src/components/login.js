@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { LOGIN_USER } from "../utils/mutations";
 import Auth from "../utils/auth";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import "../assets/login.css"
 
 
@@ -10,6 +10,7 @@ import "../assets/login.css"
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const [loginUser, { error, data }] = useMutation(LOGIN_USER);
 
@@ -52,7 +53,8 @@ function Login() {
   };
 
   const SignUpButton = async (event) => {
-    window.location.assign("/sign-up")
+    // window.location.assign("/sign-up")
+    navigate("/sign-up")
   }
 
   return (

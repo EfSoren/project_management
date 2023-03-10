@@ -170,11 +170,6 @@ nav {
   top: 0;
   color: white;
   background-image: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.4));
-  /*  background-image: linear-gradient(
-    to bottom right,
-    rgb(61, 98, 219),
-    rgb(8, 7, 61)
-  ); */
 }
 .profileImg {
  display: none;
