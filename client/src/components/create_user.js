@@ -3,11 +3,12 @@ import { checkPassword, validateEmail } from "../utils/helpers";
 import { CREATE_USER, LOGIN_USER } from "../utils/mutations";
 import { useMutation } from "@apollo/client";
 import Auth from "../utils/auth";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 
 export default function CreateUser() {
+  const navigate = useNavigate();
   const [userInfo, setUserInfo] = useState({
     username: "",
     email: "",
@@ -62,6 +63,7 @@ export default function CreateUser() {
         variables: { email: userInfo.email, password: userInfo.password },
       });
       Auth.login(signIn.data.login.token);
+      navigate("/home");
     } catch (error) {
       console.log(error);
     }
