@@ -9,12 +9,15 @@ body {
     rgba(141, 24, 43, 0.911),
     rgba(202, 61, 84, 0.795)
   );
+  font-family:Arial, Helvetica, sans-serif;
 }
+
 #root {
-  min-height: 100vh;
+  height: 100vh;
   width: 100%;
   background-image: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.2));
 }
+
 nav {
   min-width: 15vw;
   height: 100%;
@@ -28,6 +31,13 @@ nav {
     rgb(8, 7, 61)
   ); */
 }
+.profileImg {
+  height: auto;
+  width: 75%;
+}
+.nav-profile {
+  margin-top: 10px;
+}
 .nav-wrapper {
   display: flex;
   width: 100%;
@@ -37,44 +47,31 @@ nav {
 }
 .nav-header {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: space-around;
 }
-.psuedoImage {
-}
-.nav-profile {
-  display: flex;
-
-  flex-direction: column;
-}
-.nav-profile h1 {
-  margin: 0;
-}
-.nav-profile h2 {
-  margin: 0;
+.profileInfo {
+  margin: auto auto;
+  text-align: center;
 }
 .nav-link-container {
   display: flex;
   margin-top: 1rem;
   flex-direction: column;
   align-items: center;
+  justify-content: space-around;
 }
-
 .nav-link-container a {
   margin: 0.5rem 0;
   text-decoration: none;
   color: white;
 }
-
+.nav-link-container button {
+  width: fit-content;
+}
 .project-container {
-  background-image: linear-gradient(
-    to bottom right,
-    rgba(202, 61, 84, 0.904),
-    rgba(141, 24, 43, 0.911),
-    rgb(8, 7, 61),
-    rgba(23, 82, 100, 0.877),
-    rgb(149, 219, 240)
-  );
+  background-color:rgba(23, 82, 100, 0.877);
   box-shadow: 0 5px 5px 1px black;
   border-radius: 25px;
   padding: 3rem 1rem;
@@ -97,3 +94,151 @@ nav {
   border-radius: 10px;
   padding: 1rem;
 }
+.project-card:hover {
+  cursor: pointer;
+}
+.createProjForm { 
+  position: relative;
+  left: 50%;
+  top: 20%;
+  width: auto;
+  border-style: solid;
+  border-color: white;
+  height: 45%;
+  padding: 0 10px;
+}
+.submitBtn {
+  width: 50%;
+  margin: 0 auto;
+}
+#Loading {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  color: white;
+  font-size: larger;
+}
+.single-project-wrapper {
+  background-image: none;
+  background-color:rgba(23, 82, 100, 0.877);
+  display: flex;
+  flex-direction: column;
+  color: white;
+  box-shadow: 0 5px 5px 1px black;
+  border-radius: 25px;
+  padding: 3rem 5rem;
+  width: 70%;
+  margin-left: 20%;
+  min-height: 500px;
+  position: absolute;
+  top: 10%;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+
+
+
+@media (max-width: 1023px) {
+body {
+  background-image: none;
+  background-color: crimson;
+}
+#root {
+  height: 100vh;
+  width: 100%;
+  background-image: none;
+}
+.project-container {
+  grid-template-columns: 80%;
+  position: relative;
+  margin: 15% auto 0;
+}
+.single-project-wrapper {
+  background-image: none;
+  background-color:rgba(23, 82, 100, 0.877);
+  position: relative;
+  top: 15%;
+  justify-content: space-around;
+  align-items: flex-start;
+  margin: 10% auto;
+  width:auto;
+}
+nav {
+  height: 15%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  color: white;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.4));
+}
+.profileImg {
+ display: none;
+}
+.nav-wrapper {
+  width: 100%;
+  flex-direction: column;
+  position: absolute;
+  top: 10%;
+}
+.nav-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+.nav-header .profileInfo{
+  margin: 0;
+}
+.nav-link-container {
+  display: flex;
+  margin-top: 1rem;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+.createProjForm { 
+  position: relative;
+  left: 0;
+  top: 0;
+  width: auto;
+  border-style: solid;
+  border-color: white;
+  height: 45%;
+  padding: 0 10px;
+}
+
+
+
+}
+
+
+
+@media (max-width: 767px) {
+.project-container {
+  grid-template-columns: 95%;
+  top: 15%;
+}
+.createProjForm { 
+  position: relative;
+  left: 0;
+  top: 0;
+  width: auto;
+  border-style: solid;
+  border-color: white;
+  height: 45%;
+  padding: 0 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+}
+

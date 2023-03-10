@@ -6,6 +6,7 @@ import Login from "./components/login";
 import Current from "./components/current_card";
 import Create from "./components/create_project";
 import CreateUser from "./components/create_user";
+import "./assets/styles.css"
 import {
   ApolloClient,
   InMemoryCache,
@@ -13,7 +14,7 @@ import {
   ApolloProvider,
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
-
+// import './assets/style.css'
 const httpLink = createHttpLink({
   uri: "/graphql",
 });
@@ -47,14 +48,16 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="sign-up" element={<CreateUser />} />
-        <Route path="/home" element={<Nav />}>
+          <Route path="/" element={<Login />} />
+          <Route path="sign-up" element={<CreateUser />} />
+        <Route path="home" element={<Nav />}> 
           <Route index element={<Cards />} />
           <Route path="single" element={<Current />} />
           <Route path=":projectId" element={<Current />} />
           <Route path="create" element={<Create />} />
+          <Route path="*" element={<Cards />} />
         </Route>
+          <Route path="*" element={<Login />} />
       </Routes>
     </ApolloProvider>
   );

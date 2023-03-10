@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { useQuery } from "@apollo/client";
-import { Link } from "react-router-dom";
 import { QUERY_USER, QUERY_TEAM } from "../utils/queries";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import auth from "../utils/auth";
 
 function Cards() {
+  const navigate = useNavigate();
+  const linkStyle = { textDecorationLine: "none", textDecoration: "none" };
   const [tokenId, setTokenId] = useState("");
   const [teamId, setTeamId] = useState("");
   /* const [getUser] = useQuery(QUERY_USER); */
@@ -25,20 +27,33 @@ function Cards() {
   });
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div id="Loading">Loading...</div>;
+  }
+
+  function formatDate(date) {
+    const convertNum = Number(date);
+    const convertDate = new Date(convertNum);
+    const convertLocal = convertDate.toLocaleDateString("en-US");
+    console.log(convertLocal);
+    return convertLocal
   }
 
   const projects = teamData?.getTeam.project || [];
   console.log(projects);
-  function Card({ _id, projectName, __typename }) {
+  const testDate = formatDate(projects[0].endDate);
+
+  function Card({ _id, projectName, endDate, __typename, description }) {
+    const ProjectCardBtn = async (event) => {
+      // window.location.assign(`/home/${_id}`);
+      navigate(`/home/${_id}`)
+    };
+
     return (
-      <Link to={`/home/${_id}`}>
-        <article className="project-card">
-          <h1>{projectName}</h1>
-          <h2>{__typename}</h2>
-          <p>{_id}</p>
-        </article>
-      </Link>
+      <article className="project-card" onClick={ProjectCardBtn}>
+        <h1 style={linkStyle}>{projectName}</h1>
+        <h2>{description}</h2>
+        <p>Due Date: {formatDate(endDate)}</p>
+      </article>
     );
   }
 

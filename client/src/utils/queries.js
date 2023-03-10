@@ -17,6 +17,15 @@ export const QUERY_PROJECT = gql`
     getProject(projectId: $projectId) {
       _id
       projectName
+      description
+      createdAt
+      endDate
+      teams {
+        users {
+          firstname
+          lastname
+        }
+      }
     }
   }
 `;
@@ -36,6 +45,7 @@ export const QUERY_PROJECTS = gql`
     projects {
       _id
       projectName
+      description
     }
   }
 `;
@@ -51,6 +61,8 @@ export const QUERY_TEAM = gql`
       project {
         _id
         projectName
+        description
+        endDate
       }
     }
   }

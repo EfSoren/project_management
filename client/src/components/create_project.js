@@ -2,7 +2,10 @@ import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { CREATE_PROJECT } from "../utils/mutations";
 import auth from "../utils/auth";
+import { useNavigate } from "react-router-dom";
+
 export default function Create() {
+  const navigate = useNavigate();
   const userProfile = auth.getProfile();
   const teamID = userProfile.data.team;
   const [formState, setFormState] = useState({
@@ -33,7 +36,8 @@ export default function Create() {
         },
       });
       console.log(data);
-      window.location.assign("/home");
+      // window.location.assign("/home");
+      navigate("/home");
     } catch (error) {
       console.log(error);
     }
@@ -41,7 +45,8 @@ export default function Create() {
 
   return (
     <article className="project-container">
-      <form onSubmit={handleSubmit}>
+      <form className="createProjForm" onSubmit={handleSubmit}>
+        <h2>Create a Project:</h2>
         <input
           name="projectName"
           type="text"
@@ -63,7 +68,7 @@ export default function Create() {
           onChange={handleInputChange}
           placeholder="Deadline"
         />
-        <input type="submit" value="Create Project" />
+        <input class="submitBtn" type="submit" value="Create Project" />
       </form>
     </article>
   );

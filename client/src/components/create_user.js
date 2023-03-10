@@ -3,8 +3,12 @@ import { checkPassword, validateEmail } from "../utils/helpers";
 import { CREATE_USER, LOGIN_USER } from "../utils/mutations";
 import { useMutation } from "@apollo/client";
 import Auth from "../utils/auth";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
+
+
 export default function CreateUser() {
+  const navigate = useNavigate();
   const [userInfo, setUserInfo] = useState({
     username: "",
     email: "",
@@ -12,7 +16,7 @@ export default function CreateUser() {
     firstname: "",
     lastname: "",
     position: "",
-    team: "",
+    team: "640a5f4483174ccad1126b30",
   });
   const [errorMessage, setErrorMessage] = useState("");
   const [createUser] = useMutation(CREATE_USER);
@@ -23,8 +27,6 @@ export default function CreateUser() {
       ...userInfo,
       [name]: value,
     });
-    // console.log(value);
-    // console.log(userInfo);
   };
   const handleFormSubmit = async (e) => {
     // Preventing the default behavior of the form submit (which is to refresh the page)
@@ -61,6 +63,7 @@ export default function CreateUser() {
         variables: { email: userInfo.email, password: userInfo.password },
       });
       Auth.login(signIn.data.login.token);
+      navigate("/home");
     } catch (error) {
       console.log(error);
     }
@@ -94,7 +97,7 @@ export default function CreateUser() {
           type="text"
           value={userInfo.team}
           onChange={handleInputChange}
-          placeholder="Team ID"
+          placeholder="640a5f4483174ccad1126b30"
         />
         <input
           name="email"

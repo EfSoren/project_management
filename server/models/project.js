@@ -20,10 +20,12 @@ const projectSchema = new Schema({
   description: {
     type: String,
   },
-  teams: {
-    type: Schema.Types.ObjectId,
-    ref: "team",
-  },
+  teams: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "team",
+    },
+  ],
 
   createdAt: {
     type: Date,
@@ -31,7 +33,7 @@ const projectSchema = new Schema({
   },
   endDate: {
     type: Date,
-    default: () => new Date(+new Date() + 84 * 24 * 60 * 60 * 1000),
+    default: () => new Date(+new Date() + 14 * 24 * 60 * 60 * 1000),
   },
 });
 

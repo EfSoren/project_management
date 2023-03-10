@@ -26,6 +26,7 @@ const typeDefs = gql`
     description: String
     createdAt: String
     endDate: String
+    teams: [Team]
   }
 
   type Auth {
