@@ -16,7 +16,7 @@ export default function CreateUser() {
     firstname: "",
     lastname: "",
     position: "",
-    team: "",
+    team: "640a5f4483174ccad1126b30",
   });
   const [errorMessage, setErrorMessage] = useState("");
   const [createUser] = useMutation(CREATE_USER);
@@ -97,7 +97,7 @@ export default function CreateUser() {
           type="text"
           value={userInfo.team}
           onChange={handleInputChange}
-          placeholder="Team ID"
+          placeholder="640a5f4483174ccad1126b30"
         />
         <input
           name="email"
