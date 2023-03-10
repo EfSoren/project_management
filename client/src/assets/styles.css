@@ -121,6 +121,19 @@ nav {
 .single-project-wrapper {
   background-image: none;
   background-color:rgba(23, 82, 100, 0.877);
+  display: flex;
+  flex-direction: column;
+  color: white;
+  box-shadow: 0 5px 5px 1px black;
+  border-radius: 25px;
+  padding: 3rem 5rem;
+  width: 70%;
+  margin-left: 20%;
+  min-height: 500px;
+  position: absolute;
+  top: 10%;
+  justify-content: space-around;
+  align-items: flex-start;
 }
 
 
@@ -139,6 +152,16 @@ body {
   grid-template-columns: 80%;
   position: relative;
   margin: 15% auto 0;
+}
+.single-project-wrapper {
+  background-image: none;
+  background-color:rgba(23, 82, 100, 0.877);
+  position: relative;
+  top: 15%;
+  justify-content: space-around;
+  align-items: flex-start;
+  margin: 10% auto;
+  width:auto;
 }
 nav {
   height: 15%;

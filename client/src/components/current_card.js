@@ -2,7 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { QUERY_PROJECT } from "../utils/queries";
-import "../assets/single_project.css";
+// import "../assets/single_project.css";
 function Current() {
   const { projectId } = useParams();
   const { loading, data } = useQuery(QUERY_PROJECT, {
