@@ -50,12 +50,14 @@ function App() {
       <Routes>
           <Route path="/" element={<Login />} />
           <Route path="sign-up" element={<CreateUser />} />
-          <Route path="home" element={<Nav />}>
+        <Route path="home" element={<Nav />}> 
           <Route index element={<Cards />} />
           <Route path="single" element={<Current />} />
           <Route path=":projectId" element={<Current />} />
           <Route path="create" element={<Create />} />
+          <Route path="*" element={<Cards />} />
         </Route>
+          <Route path="*" element={<Login />} />
       </Routes>
     </ApolloProvider>
   );
