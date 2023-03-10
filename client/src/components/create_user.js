@@ -26,8 +26,6 @@ export default function CreateUser() {
       ...userInfo,
       [name]: value,
     });
-    // console.log(value);
-    // console.log(userInfo);
   };
   const handleFormSubmit = async (e) => {
     // Preventing the default behavior of the form submit (which is to refresh the page)
