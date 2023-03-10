@@ -32,6 +32,7 @@ function Login() {
       });
 
       Auth.login(data.login.token);
+      navigate("/home");
     } catch (error) {
       console.log(error);
     }
