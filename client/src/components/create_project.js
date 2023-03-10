@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { CREATE_PROJECT } from "../utils/mutations";
 import auth from "../utils/auth";
-
+import { useNavigate } from "react-router-dom";
 
 export default function Create() {
+  const navigate = useNavigate();
   const userProfile = auth.getProfile();
   const teamID = userProfile.data.team;
   const [formState, setFormState] = useState({
@@ -35,7 +36,8 @@ export default function Create() {
         },
       });
       console.log(data);
-      window.location.assign("/home");
+      // window.location.assign("/home");
+      navigate("/home");
     } catch (error) {
       console.log(error);
     }
