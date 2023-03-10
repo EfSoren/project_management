@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 // import Logout from "./logout";
 import auth from "../utils/auth";
 import { useQuery } from "@apollo/client";
@@ -9,14 +9,16 @@ import profileImg from "../assets/images/profile.jpg"
 function Nav() {
   // Query
   const userProfile = auth.getProfile();
-
+  const navigate = useNavigate();
   const handleLogout = () => {
     localStorage.removeItem("id_token");
-    window.location.assign("/");
+    // window.location.assign("/");
+    navigate("/");
   };
 
   if (!userProfile) {
-    window.location.assign("/");
+    // window.location.assign("/");
+    navigate("/");
   }
   const userID = userProfile.data._id;
 
